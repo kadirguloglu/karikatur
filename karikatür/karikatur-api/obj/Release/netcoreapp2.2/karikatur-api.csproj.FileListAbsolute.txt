@@ -1,0 +1,17 @@
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-api.deps.json
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-api.runtimeconfig.json
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-api.runtimeconfig.dev.json
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-api.dll
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-api.pdb
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-db.dll
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Release\netcoreapp2.2\karikatur-db.pdb
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.csprojAssemblyReference.cache
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.csproj.CoreCompileInputs.cache
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.RazorAssemblyInfo.cache
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.RazorAssemblyInfo.cs
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.AssemblyInfoInputs.cache
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.AssemblyInfo.cs
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.RazorTargetAssemblyInfo.cache
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.csproj.CopyComplete
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.dll
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Release\netcoreapp2.2\karikatur-api.pdb

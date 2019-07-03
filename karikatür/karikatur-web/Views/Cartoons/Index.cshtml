@@ -1,0 +1,64 @@
+﻿@model IEnumerable<karikatur_db.Models.Cartoon>
+
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rank)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drawers)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Drawers)
+            </th>
+            <th>
+                İlk Resim
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (karikatur_db.Models.Cartoon item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Rank)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Drawers.Name)
+                </td>
+                <td>
+                    <img class="img-fluid" style="max-height:200px" src="@item.Drawers.LogoSrc" />
+                </td>
+                <td>
+                    @if (item.CartoonImages.Count > 0)
+                    {
+                        <img class="img-fluid" style="max-height:200px" src="@item.CartoonImages.FirstOrDefault().ImageSrc" />
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

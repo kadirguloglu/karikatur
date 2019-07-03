@@ -1,0 +1,55 @@
+﻿@model karikatur_db.Models.Users
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="row">
+    <div class="col-md-4">
+        <form method="post" action="@(ViewBag.GetPassword?"/Login/LoginUser":"/Login/SendPassword")">
+            @switch (ViewBag.pageType)
+            {
+                case 0:
+                    <p class="control-label text-danger border-danger">Mail ile gönderilen parolayı giriniz</p>
+                    break;
+                case 1:
+                    <p class="control-label text-danger border-danger">Mail gönderme işlemi başarısız</p>
+                    break;
+                case 2:
+                    <p class="control-label text-danger border-danger">Kullanıcı bulunamadı</p>
+                    break;
+                case 3:
+                    <p class="control-label text-danger border-danger">Parola hatalı</p>
+                    break;
+                case 4:
+                    <p class="control-label text-danger border-danger">Parolayı tekrar isteyin. Son kullanma tarihi tükendi.</p>
+                    break;
+                case 99:
+                    <p class="control-label text-danger border-danger">Belirlenemeyen hata.</p>
+                    break;
+                default:
+                    break;
+            }
+            <p class="control-label text-danger border-danger">@ViewBag.ErrorText</p>
+            <div class="form-group">
+                <label class="control-label">Email Adresi</label>
+                <input type="text" class="form-control" name="Email" value="@ViewBag.Email" />
+            </div>
+            @if (ViewBag.GetPassword)
+            {
+                <div class="form-group">
+                    <label class="control-label">Parola</label>
+                    <input type="text" class="form-control" name="Password" value="" />
+                </div>
+            }
+            <div class="form-group">
+                <input type="submit" value="Parolayı Gönder" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

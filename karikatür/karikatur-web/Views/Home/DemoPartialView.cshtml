@@ -1,0 +1,48 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title> OCR DEMO</title>
+
+</head>
+
+<body>
+
+
+    <img src="~/yuvayi-disi-kus-yapar.jpg" /> 
+    <p id="image-text">
+
+    </p>
+    <h1 id="process-second"></h1>
+    <script src='https://unpkg.com/tesseract.js@v2.0.0-alpha.10/dist/tesseract.min.js'></script>
+
+    <script>
+
+
+
+        const { TesseractWorker } = Tesseract;
+        const worker = new TesseractWorker();
+
+        worker
+            .recognize('/yuvayi-disi-kus-yapar.jpg','tur')
+            .progress((p) => {
+                document.getElementById('process-second').innerHTML = p.progress * 100;
+            })
+            .then((text) => {
+                document.getElementById('image-text').innerHTML = text.text;
+                worker.terminate();
+            });
+
+    </script>
+
+</body>
+
+</html>

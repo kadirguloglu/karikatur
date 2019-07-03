@@ -1,0 +1,23 @@
+﻿@model List<string>
+@{
+    Layout = null;
+}
+
+<div class="row" id="image-list">
+    <div id="add-image" class="col-md-3 p-1 mb-1">
+        <div class="border border-primary text-center h-100 d-flex justify-content-center align-items-center">
+            <input type="file" accept="image/*" id="upload-image" class="visible d-none" />
+            <button type="button" id="upload-image-button" class="btn btn-info">
+                <i class="fas fa-plus-square fa-10x"></i>
+            </button>
+        </div>
+    </div>
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 p-1 mb-1">
+            <div class="border border-primary text-center h-100 d-flex justify-content-center align-items-center">
+                <img src="@item" class="img-fluid" />
+            </div>
+        </div>
+    }
+</div>

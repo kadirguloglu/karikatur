@@ -1,0 +1,18 @@
+﻿@model List<string>
+@{
+    ViewData["Title"] = "UnusedPictures";
+}
+
+<div class="row">
+    <a class="btn btn-primary" href="/Home/DeleteUnusedPictures">Kullanılmayan görselleri sil</a>
+</div>
+<div class="row" id="image-list">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-3 p-1 mb-1">
+            <div class="border border-primary text-center h-100 d-flex justify-content-center align-items-center">
+                <img src="@item" class="img-fluid" />
+            </div>
+        </div>
+    }
+</div>

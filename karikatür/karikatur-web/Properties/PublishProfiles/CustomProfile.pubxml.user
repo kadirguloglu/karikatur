@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAXNvw5HwGk06LBRcspOddwQAAAAACAAAAAAAQZgAAAAEAACAAAACg6SbcvuT1nHtLD7btrrJywMXs7yhUhNLBpKiS+d8XugAAAAAOgAAAAAIAACAAAAC1Ms5K6CIrjM8A6y9wQ1X0ipPLFbsyno2zWs2FZL4P/SAAAAA1iuMnuR1iST5CByLYrkni+vf/vdKbvANkq5KXbOO0EkAAAADBCOKD+oaLMnTxWwz6v/cEHAqOMkEpnEbJwNqlwkBwt1c3xt/L+r6gjcBarvuyuRKlEjzXn0Ght8pAHzkFeeNv</EncryptedPassword>
+    <_PublishTargetUrl>ftp://94.73.148.157/karikatur-admin.antiquemedia.net</_PublishTargetUrl>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="appsettings.Development.json">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="appsettings.json">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="dotnet-aspnet-codegenerator-design.dll">
+      <publishTime>02/03/2019 19:52:30</publishTime>
+    </File>
+    <File Include="karikatur-db.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="karikatur-db.pdb">
+      <publishTime>06/24/2019 22:28:27</publishTime>
+    </File>
+    <File Include="karikatur-web.deps.json">
+      <publishTime>06/24/2019 23:11:56</publishTime>
+    </File>
+    <File Include="karikatur-web.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="karikatur-web.pdb">
+      <publishTime>06/24/2019 23:11:53</publishTime>
+    </File>
+    <File Include="karikatur-web.runtimeconfig.json">
+      <publishTime>06/24/2019 23:11:56</publishTime>
+    </File>
+    <File Include="karikatur-web.Views.dll">
+      <publishTime>01/01/0001 00:00:00</publishTime>
+    </File>
+    <File Include="karikatur-web.Views.pdb">
+      <publishTime>06/24/2019 23:11:54</publishTime>
+    </File>
+    <File Include="Microsoft.CodeAnalysis.CSharp.Workspaces.dll">
+      <publishTime>05/27/2019 21:51:03</publishTime>
+    </File>
+    <File Include="Microsoft.CodeAnalysis.Workspaces.dll">
+      <publishTime>05/27/2019 21:50:23</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Abstractions.dll">
+      <publishTime>03/22/2019 05:06:24</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.dll">
+      <publishTime>03/22/2019 05:06:32</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.Relational.dll">
+      <publishTime>03/22/2019 05:06:34</publishTime>
+    </File>
+    <File Include="Microsoft.EntityFrameworkCore.SqlServer.dll">
+      <publishTime>03/22/2019 05:06:58</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Contracts.dll">
+      <publishTime>02/03/2019 19:51:56</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Core.dll">
+      <publishTime>02/03/2019 19:52:00</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.dll">
+      <publishTime>02/03/2019 19:52:04</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.EntityFrameworkCore.dll">
+      <publishTime>02/03/2019 19:52:02</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Templating.dll">
+      <publishTime>02/03/2019 19:51:58</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGeneration.Utils.dll">
+      <publishTime>02/03/2019 19:51:56</publishTime>
+    </File>
+    <File Include="Microsoft.VisualStudio.Web.CodeGenerators.Mvc.dll">
+      <publishTime>02/03/2019 19:52:04</publishTime>
+    </File>
+    <File Include="NuGet.Frameworks.dll">
+      <publishTime>05/27/2019 21:51:02</publishTime>
+    </File>
+    <File Include="Remotion.Linq.dll">
+      <publishTime>05/27/2019 21:51:18</publishTime>
+    </File>
+    <File Include="System.Composition.AttributedModel.dll">
+      <publishTime>05/27/2019 21:51:43</publishTime>
+    </File>
+    <File Include="System.Composition.Convention.dll">
+      <publishTime>05/27/2019 21:51:43</publishTime>
+    </File>
+    <File Include="System.Composition.Hosting.dll">
+      <publishTime>05/27/2019 21:51:44</publishTime>
+    </File>
+    <File Include="System.Composition.Runtime.dll">
+      <publishTime>05/27/2019 21:51:44</publishTime>
+    </File>
+    <File Include="System.Composition.TypedParts.dll">
+      <publishTime>05/27/2019 21:51:44</publishTime>
+    </File>
+    <File Include="System.Interactive.Async.dll">
+      <publishTime>02/10/2019 10:25:19</publishTime>
+    </File>
+    <File Include="web.config">
+      <publishTime>06/24/2019 23:11:56</publishTime>
+    </File>
+    <File Include="wwwroot/css/site.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/favicon.ico">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/Image/1239ae77-f1af-4dbe-bcd7-d18f67057990/IMG_E6659.JPG">
+      <publishTime>06/19/2019 02:12:02</publishTime>
+    </File>
+    <File Include="wwwroot/Image/18f6e717-0d85-4dfb-8251-dcf865e9aeb6/Ekran-Alıntısı.png">
+      <publishTime>06/19/2019 02:22:44</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2810%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2810%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2811%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2811%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2812%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2812%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2813%29 - Kopya - Kopya/1_1HcGNZYjo78mH0faO3BnaQ.png">
+      <publishTime>05/31/2019 07:55:09</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2813%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %2813%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %282%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %283%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %284%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %285%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %286%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %286%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %287%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %287%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %288%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %288%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %289%29 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya %289%29/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168 - Kopya/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/19b14e01-2b77-4e8a-81bc-f08632c42168/Screenshot_1559312123.png">
+      <publishTime>05/31/2019 17:15:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/1c6560fa-533f-4963-a45a-77dab1e303d8/44847212_507788056375653_5378729199019934094_n.jpg">
+      <publishTime>06/20/2019 23:02:15</publishTime>
+    </File>
+    <File Include="wwwroot/Image/2390c86a-dcaf-4e50-8c28-88610efc5eaa/Screenshot_1559312123.png">
+      <publishTime>06/19/2019 02:54:40</publishTime>
+    </File>
+    <File Include="wwwroot/Image/25cef1df-e5b9-49b6-8564-3ba28ded01e3/43704390_324477804947056_2845668494201192167_n.jpg">
+      <publishTime>06/20/2019 23:01:59</publishTime>
+    </File>
+    <File Include="wwwroot/Image/291d5018-e243-4c04-a336-81db28893d12/45337238_256211468384442_1767970772897386274_n.jpg">
+      <publishTime>06/20/2019 23:02:29</publishTime>
+    </File>
+    <File Include="wwwroot/Image/324d82b5-47a8-4f72-bd6c-7836d1e684cd/Screenshot_1559312123.png">
+      <publishTime>06/19/2019 02:57:34</publishTime>
+    </File>
+    <File Include="wwwroot/Image/3355073c-cbed-4656-b29d-a42f56201ab5/6-35.jpg">
+      <publishTime>06/20/2019 23:01:49</publishTime>
+    </File>
+    <File Include="wwwroot/Image/34274a78-1715-428b-8329-8dcdb809d4c1/Ekran-Alıntısı.png">
+      <publishTime>06/19/2019 02:45:35</publishTime>
+    </File>
+    <File Include="wwwroot/Image/38231f8a-d835-46a2-95ca-f3b1637817a2/b7c4deda-8a57-4eb6-b51d-67de20153a23.jpg">
+      <publishTime>06/20/2019 14:50:00</publishTime>
+    </File>
+    <File Include="wwwroot/Image/4547c700-24c3-4ad1-b8e9-bf7488e5566d/1_1HcGNZYjo78mH0faO3BnaQ.png">
+      <publishTime>06/19/2019 02:55:20</publishTime>
+    </File>
+    <File Include="wwwroot/Image/470fc9e1-a185-41f6-ace4-c38ecf1ebebf/IMG_E6659.JPG">
+      <publishTime>06/19/2019 02:57:15</publishTime>
+    </File>
+    <File Include="wwwroot/Image/4eb402ed-013c-433f-b80b-e6b38a1cadbd/b7c4deda-8a57-4eb6-b51d-67de20153a23.jpg">
+      <publishTime>06/20/2019 14:53:10</publishTime>
+    </File>
+    <File Include="wwwroot/Image/50bac5b7-935c-4a21-92ec-91cf66cf9874/Ekran-Alıntısı.png">
+      <publishTime>06/19/2019 02:56:28</publishTime>
+    </File>
+    <File Include="wwwroot/Image/624210ea-5679-47e0-a934-58b5de454837/Screenshot_1559312123.png">
+      <publishTime>06/19/2019 02:21:19</publishTime>
+    </File>
+    <File Include="wwwroot/Image/7f865957-c5d8-42fd-a6ed-63d31bc5dcb2/b7c4deda-8a57-4eb6-b51d-67de20153a23.jpg">
+      <publishTime>06/20/2019 14:50:09</publishTime>
+    </File>
+    <File Include="wwwroot/Image/8a0ff11e-c474-4d7a-b4a1-060f377f00de/b7c4deda-8a57-4eb6-b51d-67de20153a23.jpg">
+      <publishTime>06/20/2019 14:50:50</publishTime>
+    </File>
+    <File Include="wwwroot/Image/8bfad49b-3b1a-4eb2-9a37-767a902c3538/Screenshot_1559312116.png">
+      <publishTime>06/19/2019 02:17:55</publishTime>
+    </File>
+    <File Include="wwwroot/Image/8f88673f-ad8d-47ed-a95d-c5d731e70dff/6-35.jpg">
+      <publishTime>06/24/2019 22:23:29</publishTime>
+    </File>
+    <File Include="wwwroot/Image/9430dbeb-7d9c-4edf-ba33-341e97b63169/Screenshot_1559312116.png">
+      <publishTime>06/19/2019 02:56:23</publishTime>
+    </File>
+    <File Include="wwwroot/Image/a4085b2a-4005-4358-9945-fe8ddbcd72bb/Screenshot_1559312116.png">
+      <publishTime>06/19/2019 02:57:02</publishTime>
+    </File>
+    <File Include="wwwroot/Image/be1a9f59-12ea-4c28-920b-5a5de3efdfc6/IMG_E6659.JPG">
+      <publishTime>06/19/2019 02:55:51</publishTime>
+    </File>
+    <File Include="wwwroot/Image/f229d518-3b16-401c-9561-eae284ec5a81/Ekran-Alıntısı.png">
+      <publishTime>06/19/2019 02:18:02</publishTime>
+    </File>
+    <File Include="wwwroot/js/site.js">
+      <publishTime>06/24/2019 23:10:22</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.css.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.js.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/bootstrap/LICENSE">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation-unobtrusive/LICENSE.txt">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/additional-methods.min.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/dist/jquery.validate.min.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery-validation/LICENSE.md">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.js">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/dist/jquery.min.map">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+    <File Include="wwwroot/lib/jquery/LICENSE.txt">
+      <publishTime>06/18/2019 15:41:19</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

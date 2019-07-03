@@ -1,0 +1,35 @@
+﻿@model List<karikatur_db.Models.Drawer>
+@{
+    ViewData["Title"] = "BulkCartoonInsert";
+}
+
+
+<div class="row">
+    <div class="col-md-12">
+        <h1>@ViewBag.message</h1>
+        <form action="/Home/BulkCartoonInsert" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label class="control-label">Çizer seçiniz</label>
+                <select name="DrawerId" class="form-control">
+                    @foreach (karikatur_db.Models.Drawer item in Model)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Karikatürler</label>
+                <input type="file" name="CartoonImages" required id="choose_cartoon_images_input" accept="image/*" multiple />
+            </div>
+            <div class="row">
+                <h3>Seçilen resimlerin ön izlemesi</h3>
+            </div>
+            <div class="selected-images-preview row">
+
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-info" value="Kaydet" />
+            </div>
+        </form>
+    </div>
+</div>
