@@ -45,27 +45,34 @@ import { getCartoons, postCartoonLikes } from "../src/actions/cartoonService";
 // await AdMobInterstitial.requestAdAsync();
 // await AdMobInterstitial.showAdAsync();
 
-const imageWebPageUrl = "http://karikatur-admin.antiquemedia.net";
+const imageWebPageUrl = "http://karikatur-admin.kadirguloglu.com";
 
 const adMobBannerCode = "ca-app-pub-2691089291450682/2988656739";
+
+const adMobVideoAdsCode = "ca-app-pub-2691089291450682/1466803456";
 
 const themeColor = "#ff487e";
 
 const { width, height } = Dimensions.get("window");
 
 class HomeScreen extends React.Component {
-  state = {
-    modalVisible: false,
-    swiperPage: 1,
-    page: 1,
-    deckElement: null,
-    cartoons: null,
-    getLoader: false,
-    likeButton: true,
-    getPreview: true,
-    spinnerDownloadAdMobRewarded: false,
-    isWatchingVideo: false
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      swiperPage: 1,
+      page: 1,
+      deckElement: null,
+      cartoons: null,
+      getLoader: false,
+      likeButton: true,
+      getPreview: true,
+      spinnerDownloadAdMobRewarded: false,
+      isWatchingVideo: false,
+      bannerLoader: true
+    };
+  }
+
   static navigationOptions = {
     header: null
   };
@@ -74,15 +81,26 @@ class HomeScreen extends React.Component {
     let imageHeight = Math.round((width * 9) / 16);
     let imageWidth = width;
     this.setState({ imageHeight, imageWidth });
+    let storePage = await AsyncStorage.getItem("@page");
+    storePage = storePage == null ? 1 : storePage;
+    this.setState({ page: parseInt(storePage) });
     this._handleSwipeCartoonItem(1);
     const storageGetPreview = await AsyncStorage.getItem("@getPreview");
-    this.setState({
-      getPreview: storageGetPreview
-        ? storageGetPreview === "1"
-          ? false
-          : true
+    let storeData = storageGetPreview
+      ? storageGetPreview === "1"
+        ? false
         : true
+      : true;
+    this.setState({
+      getPreview: storeData
     });
+
+    if (storeData) {
+      setTimeout(() => {
+        this.setState({ getPreview: false });
+        this._handleSetPreviewPageInStorage();
+      }, 5000);
+    }
 
     AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () =>
       this.setState({ isWatchingVideo: true })
@@ -141,10 +159,6 @@ class HomeScreen extends React.Component {
     }
   };
 
-  _handleOnLoadBanner = () => {
-    this.setState({ getLoader: false });
-  };
-
   _handleSetInitialState = (p, v) => {
     this.setState({ [p]: v });
   };
@@ -162,7 +176,6 @@ class HomeScreen extends React.Component {
     let { swiperPage, page } = this.state;
     let data = null;
     if (swiperPage % 6 == 0) {
-      this.setState({ getLoader: true });
       data = (
         <Card style={{ elevation: 3 }}>
           <CardItem>
@@ -181,8 +194,6 @@ class HomeScreen extends React.Component {
               bannerSize="mediumRectangle"
               adUnitID={adMobBannerCode}
               testDeviceID="EMULATOR"
-              onDidFailToReceiveAdWithError={this._handleOnErrorBanner}
-              onAdViewDidReceiveAd={this._handleOnLoadBanner}
             />
           </CardItem>
         </Card>
@@ -261,6 +272,7 @@ class HomeScreen extends React.Component {
           </Card>
         );
         let newPage = page + appendPage;
+        AsyncStorage.setItem("@page", newPage + "");
         this.setState({
           deckElement: _dataObject,
           cartoons: payloadItem,
@@ -293,8 +305,10 @@ class HomeScreen extends React.Component {
 
   _handlePressSaveCartoon = async () => {
     this.setState({ spinnerDownloadAdMobRewarded: true });
-    AdMobRewarded.setAdUnitID("ca-app-pub-3940256099942544/5224354917"); // Test ID, Replace with your-admob-unit-id
-    AdMobRewarded.setTestDeviceID("EMULATOR");
+    AdMobRewarded.setAdUnitID(adMobVideoAdsCode);
+    if (__DEV__) {
+      AdMobRewarded.setTestDeviceID("EMULATOR");
+    }
     await AdMobRewarded.requestAdAsync();
     await AdMobRewarded.showAdAsync();
   };
@@ -329,7 +343,8 @@ class HomeScreen extends React.Component {
       getLoader,
       likeButton,
       getPreview,
-      spinnerDownloadAdMobRewarded
+      spinnerDownloadAdMobRewarded,
+      page
     } = this.state;
     return (
       <Container>

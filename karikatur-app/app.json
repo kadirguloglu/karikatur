@@ -3,9 +3,13 @@
     "name": "Karikatür Madeni",
     "slug": "karikatur-app",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
-    "platforms": ["ios", "android", "web"],
-    "version": "7.1.5",
+    "sdkVersion": "35.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "version": "7.2.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -16,14 +20,16 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.antiqmedia.karikaturmadeni"
     },
     "android": {
       "package": "com.antiqmedia.karikaturmadeni",
-      "versionCode": 10,
+      "versionCode": 14,
       "icon": "./assets/images/icon.png"
     },
     "description": ""

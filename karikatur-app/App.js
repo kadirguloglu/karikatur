@@ -16,14 +16,18 @@ import Sentry from "sentry-expo";
 
 import Main from "./screens/Main";
 
-Sentry.enableInExpoDevelopment = true;
+// Sentry.config(
+//   "https://126f9bb1294345ffb7627dc5527e6fe0@sentry.io/1486156"
+// ).install();
 
-Sentry.config(
-  "https://126f9bb1294345ffb7627dc5527e6fe0@sentry.io/1486156"
-).install();
+// Sentry.init({
+//   dsn: "https://126f9bb1294345ffb7627dc5527e6fe0@sentry.io/1486156",
+//   enableInExpoDevelopment: true,
+//   debug: true
+// });
 
 const client = axios.create({
-  baseURL: "http://karikatur-api.antiquemedia.net",
+  baseURL: "http://karikatur-api.kadirguloglu.com",
   responseType: "json"
 });
 
