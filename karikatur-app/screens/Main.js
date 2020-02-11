@@ -1,10 +1,8 @@
 import React from "react";
 import AppNavigator from "../navigation/AppNavigator";
 
-class Main extends React.Component {
-  render() {
-    return <AppNavigator />;
-  }
+function Main() {
+  return <AppNavigator />;
 }
 
 export default Main;

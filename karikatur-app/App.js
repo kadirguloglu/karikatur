@@ -27,7 +27,7 @@ import Main from "./screens/Main";
 // });
 
 const client = axios.create({
-  baseURL: "http://karikatur-api.kadirguloglu.com",
+  baseURL: "http://karikatur-api.antiquemedia.xyz",
   responseType: "json"
 });
 
