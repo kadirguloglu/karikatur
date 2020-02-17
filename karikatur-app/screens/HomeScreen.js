@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   CameraRoll,
-  Platform,
   AsyncStorage
 } from "react-native";
 import {
@@ -28,13 +27,7 @@ import {
 } from "native-base";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import Carousel from "react-native-looped-carousel";
-import {
-  AdMobBanner,
-  AdMobInterstitial,
-  PublisherBanner,
-  AdMobRewarded
-} from "expo-ads-admob";
-import { connect } from "react-redux";
+import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
 import Constants from "expo-constants";
 import * as FileSystem from "expo-file-system";
 import * as Permissions from "expo-permissions";
@@ -47,9 +40,7 @@ import { getCartoons, postCartoonLikes } from "../src/actions/cartoonService";
 // await AdMobInterstitial.showAdAsync();
 
 const imageWebPageUrl = "http://karikatur-admin.antiquemedia.xyz";
-
 const adMobBannerCode = "ca-app-pub-2691089291450682/2988656739";
-
 const adMobVideoAdsCode = "ca-app-pub-2691089291450682/1466803456";
 
 const themeColor = "#ff487e";
@@ -67,6 +58,8 @@ function HomeScreen() {
   const [getLoader, setGetLoader] = useState(false);
   const [likeButton, setLikeButton] = useState(true);
   const [getPreview, setGetPreview] = useState(true);
+  const [imageWidth, setImageWidth] = useState(0);
+  const [imageHeight, setImageHeight] = useState(0);
   const [
     spinnerDownloadAdMobRewarded,
     setSpinnerDownloadAdMobRewarded
@@ -76,10 +69,6 @@ function HomeScreen() {
 
   useEffect(() => {
     async function initPage() {
-      let imageHeight = Math.round((width * 9) / 16);
-      let imageWidth = width;
-      setImageHeight(imageHeight);
-      setImageWidth(imageWidth);
       let storePage = await AsyncStorage.getItem("@page");
       storePage = storePage == null ? 1 : storePage;
       setPage(parseInt(storePage));
@@ -119,6 +108,7 @@ function HomeScreen() {
         console.log("rewardedVideoWillLeaveApplication")
       );
     }
+    initPage();
     return () => {};
   }, []);
 
@@ -158,11 +148,6 @@ function HomeScreen() {
 
   const _handleOnImagePress = item => {
     setModalVisible(true);
-  };
-
-  const _handleOnErrorBanner = item => {
-    setGetLoader(false);
-    _handleSwipeCartoonItem(1);
   };
 
   const _handleSwipeCartoonItem = appendPage => {
@@ -322,6 +307,58 @@ function HomeScreen() {
 
   function adMobEvent() {}
 
+  const Buttons = ({}) => {
+    return (
+      <View style={style.buttonContainer}>
+        <View style={style.buttons}>
+          <Button rounded light onPress={() => _handlePressLikeCartoon()}>
+            <Icon
+              style={{
+                color: themeColor
+              }}
+              name={cartoons[0].IsLiked ? "ios-star" : "ios-star-outline"}
+            />
+          </Button>
+        </View>
+        <View style={style.buttons}>
+          <Button
+            rounded
+            light
+            onPress={() =>
+              spinnerDownloadAdMobRewarded ? null : _handlePressSaveCartoon()
+            }
+          >
+            {spinnerDownloadAdMobRewarded ? (
+              <Spinner color={themeColor} style={{ color: themeColor }} />
+            ) : (
+              <Icon
+                style={{
+                  color: themeColor
+                }}
+                name={"ios-download"}
+              />
+            )}
+          </Button>
+        </View>
+      </View>
+    );
+  };
+
+  const BottomAds = ({}) => {
+    return (
+      <View style={style.buttonContainer}>
+        <View style={style.buttons}>
+          <AdMobBanner
+            bannerSize="banner"
+            adUnitID={adMobBannerCode} // Test ID, Replace with your-admob-unit-id
+            testDeviceID="EMULATOR"
+            onDidFailToReceiveAdWithError={bannerError}
+          />
+        </View>
+      </View>
+    );
+  };
+
   return (
     <Container>
       {getPreview ? (
@@ -385,7 +422,7 @@ function HomeScreen() {
           </Modal>
           <View padder style={{ marginTop: getStatusBarHeight() }}>
             <DeckSwiper
-              ref={c => (_deckSwiper = c)}
+              ref={_deckSwiper}
               dataSource={[0]}
               renderEmpty={() => <Spinner />}
               renderItem={item => {
@@ -395,54 +432,8 @@ function HomeScreen() {
               onSwipeLeft={() => _handleSwipeCartoonItem(-1)}
             />
           </View>
-          {cartoons != null && likeButton ? (
-            <View style={style.buttonContainer}>
-              <View style={style.buttons}>
-                <Button rounded light onPress={() => _handlePressLikeCartoon()}>
-                  <Icon
-                    style={{
-                      color: themeColor
-                    }}
-                    name={cartoons[0].IsLiked ? "ios-star" : "ios-star-outline"}
-                  />
-                </Button>
-              </View>
-              <View style={style.buttons}>
-                <Button
-                  rounded
-                  light
-                  onPress={() =>
-                    spinnerDownloadAdMobRewarded
-                      ? null
-                      : _handlePressSaveCartoon()
-                  }
-                >
-                  {spinnerDownloadAdMobRewarded ? (
-                    <Spinner color={themeColor} style={{ color: themeColor }} />
-                  ) : (
-                    <Icon
-                      style={{
-                        color: themeColor
-                      }}
-                      name={"ios-download"}
-                    />
-                  )}
-                </Button>
-              </View>
-            </View>
-          ) : null}
-          {likeButton ? null : (
-            <View style={style.buttonContainer}>
-              <View style={style.buttons}>
-                <AdMobBanner
-                  bannerSize="banner"
-                  adUnitID={adMobBannerCode} // Test ID, Replace with your-admob-unit-id
-                  testDeviceID="EMULATOR"
-                  onDidFailToReceiveAdWithError={bannerError}
-                />
-              </View>
-            </View>
-          )}
+          {cartoons != null && likeButton ? <Buttons></Buttons> : null}
+          {likeButton ? null : <BottomAds></BottomAds>}
         </React.Fragment>
       )}
     </Container>
