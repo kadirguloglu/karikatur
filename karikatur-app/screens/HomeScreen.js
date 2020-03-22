@@ -47,6 +47,23 @@ const themeColor = "#ff487e";
 
 const { width, height } = Dimensions.get("window");
 
+function bannerError() {}
+
+const BottomAds = ({}) => {
+  return (
+    <View style={style.buttonContainer}>
+      <View style={style.buttons}>
+        <AdMobBanner
+          bannerSize="banner"
+          adUnitID={adMobBannerCode} // Test ID, Replace with your-admob-unit-id
+          testDeviceID="EMULATOR"
+          onDidFailToReceiveAdWithError={bannerError}
+        />
+      </View>
+    </View>
+  );
+};
+
 function HomeScreen() {
   const dispatch = useDispatch();
   const _deckSwiper = useRef();
@@ -55,17 +72,13 @@ function HomeScreen() {
   const [page, setPage] = useState(1);
   const [deckElement, setDeckElement] = useState(null);
   const [cartoons, setCartoons] = useState(null);
-  const [getLoader, setGetLoader] = useState(false);
   const [likeButton, setLikeButton] = useState(true);
   const [getPreview, setGetPreview] = useState(true);
-  const [imageWidth, setImageWidth] = useState(0);
-  const [imageHeight, setImageHeight] = useState(0);
   const [
     spinnerDownloadAdMobRewarded,
     setSpinnerDownloadAdMobRewarded
   ] = useState(false);
   const [isWatchingVideo, setIsWatchingVideo] = useState(false);
-  const [bannerLoader, setBannerLoader] = useState(true);
 
   useEffect(() => {
     async function initPage() {
@@ -84,7 +97,7 @@ function HomeScreen() {
       if (storeData) {
         setTimeout(() => {
           setGetPreview(false);
-          _handleSetPreviewPageInStorage();
+          AsyncStorage.setItem("@getPreview", "1");
         }, 5000);
       }
 
@@ -146,10 +159,6 @@ function HomeScreen() {
     }
   };
 
-  const _handleOnImagePress = item => {
-    setModalVisible(true);
-  };
-
   const _handleSwipeCartoonItem = appendPage => {
     let data = null;
     if (swiperPage % 6 == 0) {
@@ -209,12 +218,16 @@ function HomeScreen() {
             }
           }
         }
-        letCartoonItem = payloadItem[0];
+        let letCartoonItem;
+        if (payloadItem) {
+          letCartoonItem = payloadItem[0];
+        }
         let _dataObject = (
           <Card style={{ elevation: 3 }}>
             <CardItem>
               <Left>
-                {letCartoonItem.LogoSrc != null &&
+                {letCartoonItem &&
+                letCartoonItem.LogoSrc != null &&
                 letCartoonItem.LogoSrc.length ? (
                   <Thumbnail
                     source={{
@@ -223,7 +236,9 @@ function HomeScreen() {
                     circular
                   />
                 ) : null}
-                {letCartoonItem.Name != null && letCartoonItem.Name.length ? (
+                {letCartoonItem &&
+                letCartoonItem.Name != null &&
+                letCartoonItem.Name.length ? (
                   <Body>
                     <Text>{letCartoonItem.Name}</Text>
                   </Body>
@@ -233,14 +248,17 @@ function HomeScreen() {
             <CardItem cardBody>
               <TouchableOpacity
                 style={{ flex: 1, flexDirection: "row" }}
-                onPress={() => _handleOnImagePress()}
+                onPress={() => setModalVisible(true)}
               >
                 <Image
                   style={{ flex: 1, height: height * 0.7 }}
-                  source={{
-                    uri:
-                      imageWebPageUrl + letCartoonItem.CartoonImages[0].ImageSrc
-                  }}
+                  source={
+                    letCartoonItem && {
+                      uri:
+                        imageWebPageUrl +
+                        letCartoonItem.CartoonImages[0].ImageSrc
+                    }
+                  }
                   resizeMode="center"
                 />
               </TouchableOpacity>
@@ -259,7 +277,6 @@ function HomeScreen() {
   };
 
   const _handlePressLikeCartoon = () => {
-    setGetLoader(true);
     var _data = {
       Id: cartoons[0].LikeId,
       CartoonId: cartoons[0].Id,
@@ -272,7 +289,6 @@ function HomeScreen() {
         }
       }
     });
-    setGetLoader(false);
   };
 
   const _handlePressSaveCartoon = async () => {
@@ -286,24 +302,13 @@ function HomeScreen() {
   };
 
   const _handleChangePreviewTab = page => {
-    if (page == 1) {
+    if (page === 1) {
       setTimeout(() => {
         setGetPreview(false);
-        _handleSetPreviewPageInStorage();
+        AsyncStorage.setItem("@getPreview", "1");
       }, 5000);
     }
   };
-
-  const _handleClosePreviewTab = () => {
-    setGetPreview(false);
-    _handleSetPreviewPageInStorage();
-  };
-
-  const _handleSetPreviewPageInStorage = () => {
-    AsyncStorage.setItem("@getPreview", "1");
-  };
-
-  function bannerError() {}
 
   function adMobEvent() {}
 
@@ -344,98 +349,82 @@ function HomeScreen() {
     );
   };
 
-  const BottomAds = ({}) => {
+  if (getPreview) {
     return (
-      <View style={style.buttonContainer}>
-        <View style={style.buttons}>
-          <AdMobBanner
-            bannerSize="banner"
-            adUnitID={adMobBannerCode} // Test ID, Replace with your-admob-unit-id
-            testDeviceID="EMULATOR"
-            onDidFailToReceiveAdWithError={bannerError}
+      <Tabs
+        renderTabBar={() => <View />}
+        onChangeTab={({ i }) => _handleChangePreviewTab(i)}
+      >
+        <Tab heading={<View />}>
+          <Image
+            style={{ width: width, height: height }}
+            resizeMode="contain"
+            source={require("../assets/images/preview1.png")}
           />
-        </View>
-      </View>
-    );
-  };
-
-  return (
-    <Container>
-      {getPreview ? (
-        <Tabs
-          renderTabBar={() => <View />}
-          onChangeTab={({ i }) => _handleChangePreviewTab(i)}
-        >
-          <Tab heading={<View />}>
+        </Tab>
+        <Tab heading={<View />}>
+          <TouchableOpacity
+            style={{ flex: 1, flexDirection: "row" }}
+            onPress={() => {
+              setGetPreview(false);
+              AsyncStorage.setItem("@getPreview", "1");
+            }}
+          >
             <Image
               style={{ width: width, height: height }}
               resizeMode="contain"
-              source={require("../assets/images/preview1.png")}
+              source={require("../assets/images/preview2.png")}
             />
-          </Tab>
-          <Tab heading={<View />}>
-            <TouchableOpacity
-              style={{ flex: 1, flexDirection: "row" }}
-              onPress={() => _handleClosePreviewTab()}
-            >
-              <Image
-                style={{ width: width, height: height }}
-                resizeMode="contain"
-                source={require("../assets/images/preview2.png")}
-              />
-            </TouchableOpacity>
-          </Tab>
-        </Tabs>
-      ) : (
-        <React.Fragment>
-          <Modal
-            animationType={"slide"}
-            transparent={false}
-            visible={modalVisible}
+          </TouchableOpacity>
+        </Tab>
+      </Tabs>
+    );
+  }
+
+  return (
+    <Container>
+      <Modal animationType={"slide"} transparent={false} visible={modalVisible}>
+        <Icon
+          name="ios-close"
+          style={style.closeIcon}
+          size={35}
+          onPress={() => setModalVisible(!modalVisible)}
+        />
+        {cartoons != null ? (
+          <Carousel
+            delay={2000}
+            style={{ flex: 1 }}
+            autoplay={false}
+            pageInfo
+            currentPage={0}
+            // onAnimateNextPage={p => console.log(p)}
           >
-            <Icon
-              name="ios-close"
-              style={style.closeIcon}
-              size={35}
-              onPress={() => setModalVisible(!modalVisible)}
-            />
-            {cartoons != null ? (
-              <Carousel
-                delay={2000}
-                style={{ flex: 1 }}
-                autoplay={false}
-                pageInfo
-                currentPage={0}
-                // onAnimateNextPage={p => console.log(p)}
-              >
-                {cartoons[0].CartoonImages.map((el, i) => (
-                  <View style={style.modalImageContainer} key={"image" + i}>
-                    <Image
-                      style={{ height: height, width: width }}
-                      source={{ uri: imageWebPageUrl + el.ImageSrc }}
-                      resizeMode="contain"
-                    />
-                  </View>
-                ))}
-              </Carousel>
-            ) : null}
-          </Modal>
-          <View padder style={{ marginTop: getStatusBarHeight() }}>
-            <DeckSwiper
-              ref={_deckSwiper}
-              dataSource={[0]}
-              renderEmpty={() => <Spinner />}
-              renderItem={item => {
-                return deckElement;
-              }}
-              onSwipeRight={() => _handleSwipeCartoonItem(1)}
-              onSwipeLeft={() => _handleSwipeCartoonItem(-1)}
-            />
-          </View>
-          {cartoons != null && likeButton ? <Buttons></Buttons> : null}
-          {likeButton ? null : <BottomAds></BottomAds>}
-        </React.Fragment>
-      )}
+            {cartoons[0].CartoonImages.map((el, i) => (
+              <View style={style.modalImageContainer} key={"image" + i}>
+                <Image
+                  style={{ height: height, width: width }}
+                  source={{ uri: imageWebPageUrl + el.ImageSrc }}
+                  resizeMode="contain"
+                />
+              </View>
+            ))}
+          </Carousel>
+        ) : null}
+      </Modal>
+      <View padder style={{ marginTop: getStatusBarHeight() }}>
+        <DeckSwiper
+          ref={_deckSwiper}
+          dataSource={[0]}
+          renderEmpty={() => <Spinner />}
+          renderItem={item => {
+            return deckElement;
+          }}
+          onSwipeRight={() => _handleSwipeCartoonItem(1)}
+          onSwipeLeft={() => _handleSwipeCartoonItem(-1)}
+        />
+      </View>
+      {cartoons != null && likeButton ? <Buttons></Buttons> : null}
+      {likeButton ? null : <BottomAds></BottomAds>}
     </Container>
   );
 }

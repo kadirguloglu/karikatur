@@ -9,3 +9,4 @@ D:\Proje\Karikatur\karikatür\karikatur-db\obj\Debug\netcoreapp2.2\karikatur-db.
 D:\Proje\Karikatur\karikatür\karikatur-db\bin\Debug\netcoreapp2.2\karikatur-db.runtimeconfig.json
 D:\Proje\Karikatur\karikatür\karikatur-db\bin\Debug\netcoreapp2.2\karikatur-db.runtimeconfig.dev.json
 D:\Proje\Karikatur\karikatür\karikatur-db\obj\Debug\netcoreapp2.2\karikatur-db.csprojAssemblyReference.cache
+D:\Proje\Karikatur\karikatür\karikatur-db\obj\Debug\netcoreapp2.2\karikatur-db.genruntimeconfig.cache

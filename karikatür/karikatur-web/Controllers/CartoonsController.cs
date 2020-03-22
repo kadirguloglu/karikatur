@@ -22,7 +22,7 @@ namespace karikatur_web.Controllers
         // GET: Cartoons
         public async Task<IActionResult> Index()
         {
-            var karikaturContext = _context.Cartoon.Include(c => c.Drawers).Include(x=>x.CartoonImages).OrderByDescending(x => x.Rank);
+            var karikaturContext = _context.Cartoon.Include(c => c.Drawers).Include(x => x.CartoonImages).OrderByDescending(x => x.Rank);
             return View(await karikaturContext.ToListAsync());
         }
 
@@ -49,7 +49,12 @@ namespace karikatur_web.Controllers
         public IActionResult Create()
         {
             ViewData["DrawersId"] = new SelectList(_context.Drawer, "Id", "Name");
-            var oldCartoon = new Cartoon() { Rank = _context.Cartoon.Max(x => x.Rank) + 1 };
+            int maxRank = 0;
+            if (_context.Cartoon.Any())
+            {
+                maxRank = _context.Cartoon.Max(x => x.Rank) + 1;
+            }
+            var oldCartoon = new Cartoon() { Rank = maxRank };
             return View(oldCartoon);
         }
 

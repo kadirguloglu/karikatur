@@ -17,6 +17,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;a&gt; elements.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "a",
@@ -350,6 +351,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" /> implementation targeting &lt;cache&gt; elements.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "cache",
@@ -542,6 +544,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.TagHelper\" /> implementation targeting &lt;distributed-cache&gt; elements.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "distributed-cache",
@@ -743,6 +746,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;environment&gt; elements that conditionally renders\n            content based on the current value of <see cref=\"P:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName\" />.\n            If the environment is not listed in the specified <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Names\" /> or <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Include\" />, \n            or if it is in <see cref=\"P:Microsoft.AspNetCore.Mvc.TagHelpers.EnvironmentTagHelper.Exclude\" />, the content will not be rendered.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "environment",
@@ -809,6 +813,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;button&gt; elements and &lt;input&gt; elements with\n            their <c>type</c> attribute set to <c>image</c> or <c>submit</c>.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "button",
@@ -1514,6 +1519,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;form&gt; elements.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "form",
@@ -1664,6 +1670,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;img&gt; elements that supports file versioning.\n            </summary>\n            <remarks>\n            The tag helper won't process for cases with just the 'src' attribute.\n            </remarks>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "img",
@@ -1733,6 +1740,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;input&gt; elements with an <c>asp-for</c> attribute.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "input",
@@ -1836,6 +1844,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;label&gt; elements with an <c>asp-for</c> attribute.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "label",
@@ -1883,6 +1892,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;link&gt; elements that supports fallback href paths.\n            </summary>\n            <remarks>\n            The tag helper won't process for cases with just the 'href' attribute.\n            </remarks>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "link",
@@ -2198,6 +2208,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;option&gt; elements.\n            </summary>\n            <remarks>\n            This <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> works in conjunction with <see cref=\"T:Microsoft.AspNetCore.Mvc.TagHelpers.SelectTagHelper\" />. It reads elements\n            content but does not modify that content. The only modification it makes is to add a <c>selected</c> attribute\n            in some cases.\n            </remarks>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "option",
@@ -2236,6 +2247,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            Renders a partial view.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "partial",
@@ -2353,6 +2365,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;script&gt; elements that supports fallback src paths.\n            </summary>\n            <remarks>\n            The tag helper won't process for cases with just the 'src' attribute.\n            </remarks>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "script",
@@ -2608,6 +2621,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;select&gt; elements with <c>asp-for</c> and/or\n            <c>asp-items</c> attribute(s).\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "select",
@@ -2699,6 +2713,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting &lt;textarea&gt; elements with an <c>asp-for</c> attribute.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "textarea",
@@ -2760,6 +2775,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting any HTML element with an <c>asp-validation-for</c>\n            attribute.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "span",
@@ -2807,6 +2823,7 @@
         "AssemblyName": "Microsoft.AspNetCore.Mvc.TagHelpers",
         "Documentation": "\n            <summary>\n            <see cref=\"T:Microsoft.AspNetCore.Razor.TagHelpers.ITagHelper\" /> implementation targeting any HTML element with an <c>asp-validation-summary</c>\n            attribute.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "div",
@@ -2854,6 +2871,7 @@
         "AssemblyName": "Microsoft.AspNetCore.SpaServices",
         "Documentation": "\n            <summary>\n            A tag helper for prerendering JavaScript applications on the server.\n            </summary>\n        ",
         "TagOutputHint": null,
+        "CaseSensitive": false,
         "TagMatchingRules": [
           {
             "TagName": "*",
@@ -2943,199 +2961,200 @@
   "RootNamespace": "karikatur_web",
   "Documents": [
     {
-      "FilePath": "Views\\Home\\UnusedPictures.cshtml",
-      "TargetPath": "Views\\Home\\UnusedPictures.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Shared\\Error.cshtml",
-      "TargetPath": "Views\\Shared\\Error.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Users\\Details.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Users\\Details.cshtml",
       "TargetPath": "Views\\Users\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\CartoonImages\\Details.cshtml",
-      "TargetPath": "Views\\CartoonImages\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Home\\BulkCartoonInsert.cshtml",
-      "TargetPath": "Views\\Home\\BulkCartoonInsert.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Users\\Edit.cshtml",
-      "TargetPath": "Views\\Users\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonLikes\\Details.cshtml",
-      "TargetPath": "Views\\CartoonLikes\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Cartoons\\Delete.cshtml",
-      "TargetPath": "Views\\Cartoons\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Home\\Index.cshtml",
-      "TargetPath": "Views\\Home\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Users\\Index.cshtml",
-      "TargetPath": "Views\\Users\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Cartoons\\Details.cshtml",
-      "TargetPath": "Views\\Cartoons\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Shared\\ImageGallery.cshtml",
-      "TargetPath": "Views\\Shared\\ImageGallery.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Drawers\\Index.cshtml",
-      "TargetPath": "Views\\Drawers\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Home\\Privacy.cshtml",
-      "TargetPath": "Views\\Home\\Privacy.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\_ViewImports.cshtml",
-      "TargetPath": "Views\\_ViewImports.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonImages\\Edit.cshtml",
-      "TargetPath": "Views\\CartoonImages\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonLikes\\Index.cshtml",
-      "TargetPath": "Views\\CartoonLikes\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Login\\Index.cshtml",
-      "TargetPath": "Views\\Login\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Shared\\_CookieConsentPartial.cshtml",
-      "TargetPath": "Views\\Shared\\_CookieConsentPartial.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonImages\\Delete.cshtml",
-      "TargetPath": "Views\\CartoonImages\\Delete.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Users\\Create.cshtml",
-      "TargetPath": "Views\\Users\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonImages\\Index.cshtml",
-      "TargetPath": "Views\\CartoonImages\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Cartoons\\Index.cshtml",
-      "TargetPath": "Views\\Cartoons\\Index.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Shared\\_Layout.cshtml",
-      "TargetPath": "Views\\Shared\\_Layout.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Cartoons\\Edit.cshtml",
-      "TargetPath": "Views\\Cartoons\\Edit.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonImages\\Create.cshtml",
-      "TargetPath": "Views\\CartoonImages\\Create.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\_ViewStart.cshtml",
-      "TargetPath": "Views\\_ViewStart.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\CartoonLikes\\Edit.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonLikes\\Edit.cshtml",
       "TargetPath": "Views\\CartoonLikes\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Drawers\\Delete.cshtml",
-      "TargetPath": "Views\\Drawers\\Delete.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Users\\Index.cshtml",
+      "TargetPath": "Views\\Users\\Index.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Home\\DemoPartialView.cshtml",
-      "TargetPath": "Views\\Home\\DemoPartialView.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Cartoons\\Edit.cshtml",
+      "TargetPath": "Views\\Cartoons\\Edit.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\CartoonLikes\\Delete.cshtml",
-      "TargetPath": "Views\\CartoonLikes\\Delete.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonImages\\Details.cshtml",
+      "TargetPath": "Views\\CartoonImages\\Details.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Users\\Delete.cshtml",
-      "TargetPath": "Views\\Users\\Delete.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Cartoons\\Delete.cshtml",
+      "TargetPath": "Views\\Cartoons\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Cartoons\\Create.cshtml",
-      "TargetPath": "Views\\Cartoons\\Create.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonImages\\Create.cshtml",
+      "TargetPath": "Views\\CartoonImages\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Home\\Privacy.cshtml",
+      "TargetPath": "Views\\Home\\Privacy.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Drawers\\Edit.cshtml",
-      "TargetPath": "Views\\Drawers\\Edit.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonLikes\\Delete.cshtml",
+      "TargetPath": "Views\\CartoonLikes\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Drawers\\Details.cshtml",
-      "TargetPath": "Views\\Drawers\\Details.cshtml",
-      "FileKind": "mvc"
-    },
-    {
-      "FilePath": "Views\\Drawers\\Create.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Create.cshtml",
       "TargetPath": "Views\\Drawers\\Create.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\Home\\Gallery.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonLikes\\Index.cshtml",
+      "TargetPath": "Views\\CartoonLikes\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Shared\\Error.cshtml",
+      "TargetPath": "Views\\Shared\\Error.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonImages\\Edit.cshtml",
+      "TargetPath": "Views\\CartoonImages\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Shared\\_Layout.cshtml",
+      "TargetPath": "Views\\Shared\\_Layout.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Shared\\_CookieConsentPartial.cshtml",
+      "TargetPath": "Views\\Shared\\_CookieConsentPartial.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonLikes\\Details.cshtml",
+      "TargetPath": "Views\\CartoonLikes\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonImages\\Index.cshtml",
+      "TargetPath": "Views\\CartoonImages\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Users\\Delete.cshtml",
+      "TargetPath": "Views\\Users\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Home\\DemoPartialView.cshtml",
+      "TargetPath": "Views\\Home\\DemoPartialView.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonImages\\Delete.cshtml",
+      "TargetPath": "Views\\CartoonImages\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\_ViewStart.cshtml",
+      "TargetPath": "Views\\_ViewStart.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Shared\\ImageGallery.cshtml",
+      "TargetPath": "Views\\Shared\\ImageGallery.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Users\\Create.cshtml",
+      "TargetPath": "Views\\Users\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Details.cshtml",
+      "TargetPath": "Views\\Drawers\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Home\\UnusedPictures.cshtml",
+      "TargetPath": "Views\\Home\\UnusedPictures.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Home\\Index.cshtml",
+      "TargetPath": "Views\\Home\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Home\\BulkCartoonInsert.cshtml",
+      "TargetPath": "Views\\Home\\BulkCartoonInsert.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Home\\Gallery.cshtml",
       "TargetPath": "Views\\Home\\Gallery.cshtml",
       "FileKind": "mvc"
     },
     {
-      "FilePath": "Views\\CartoonLikes\\Create.cshtml",
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Cartoons\\Create.cshtml",
+      "TargetPath": "Views\\Cartoons\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Edit.cshtml",
+      "TargetPath": "Views\\Drawers\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Cartoons\\Index.cshtml",
+      "TargetPath": "Views\\Cartoons\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Cartoons\\Details.cshtml",
+      "TargetPath": "Views\\Cartoons\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Login\\Index.cshtml",
+      "TargetPath": "Views\\Login\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Delete.cshtml",
+      "TargetPath": "Views\\Drawers\\Delete.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Index.cshtml",
+      "TargetPath": "Views\\Drawers\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Users\\Edit.cshtml",
+      "TargetPath": "Views\\Users\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonLikes\\Create.cshtml",
       "TargetPath": "Views\\CartoonLikes\\Create.cshtml",
       "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\_ViewImports.cshtml",
+      "TargetPath": "Views\\_ViewImports.cshtml",
+      "FileKind": "mvc"
     }
-  ]
+  ],
+  "SerializationFormat": "0.2"
 }
