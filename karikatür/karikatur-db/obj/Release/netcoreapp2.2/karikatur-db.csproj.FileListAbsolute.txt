@@ -9,3 +9,4 @@ D:\Proje\Karikatur\karikatür\karikatur-db\obj\Release\netcoreapp2.2\karikatur-d
 D:\Proje\Karikatur\karikatür\karikatur-db\obj\Release\netcoreapp2.2\karikatur-db.AssemblyInfo.cs
 D:\Proje\Karikatur\karikatür\karikatur-db\obj\Release\netcoreapp2.2\karikatur-db.dll
 D:\Proje\Karikatur\karikatür\karikatur-db\obj\Release\netcoreapp2.2\karikatur-db.pdb
+D:\Proje\Karikatur\karikatür\karikatur-db\obj\Release\netcoreapp2.2\karikatur-db.genruntimeconfig.cache

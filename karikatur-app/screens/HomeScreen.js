@@ -33,15 +33,20 @@ import * as FileSystem from "expo-file-system";
 import * as Permissions from "expo-permissions";
 
 import { getCartoons, postCartoonLikes } from "../src/actions/cartoonService";
+import {
+  imageWebPageUrl,
+  adMobBannerCode,
+  adMobVideoAdsCode
+} from "../constants/variables";
 
 // AdMobInterstitial.setAdUnitID("ca-app-pub-2691089291450682/1466803456");
 // AdMobInterstitial.setTestDeviceID("EMULATOR");
 // await AdMobInterstitial.requestAdAsync();
 // await AdMobInterstitial.showAdAsync();
 
-const imageWebPageUrl = "http://karikatur-admin.antiquemedia.xyz";
-const adMobBannerCode = "ca-app-pub-2691089291450682/2988656739";
-const adMobVideoAdsCode = "ca-app-pub-2691089291450682/1466803456";
+// const imageWebPageUrl = "http://karikatur-admin.antiquemedia.xyz";
+// const adMobBannerCode = "ca-app-pub-2691089291450682/2988656739";
+// const adMobVideoAdsCode = "ca-app-pub-2691089291450682/1466803456";
 
 const themeColor = "#ff487e";
 
@@ -247,7 +252,13 @@ function HomeScreen() {
             </CardItem>
             <CardItem cardBody>
               <TouchableOpacity
-                style={{ flex: 1, flexDirection: "row" }}
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
                 onPress={() => setModalVisible(true)}
               >
                 <Image
@@ -259,7 +270,7 @@ function HomeScreen() {
                         letCartoonItem.CartoonImages[0].ImageSrc
                     }
                   }
-                  resizeMode="center"
+                  resizeMode="contain"
                 />
               </TouchableOpacity>
             </CardItem>

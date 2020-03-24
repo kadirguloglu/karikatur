@@ -6,4 +6,5 @@
 */*.mobileprovision
 */*.orig.*
 */web-build/
-*/web-report/
+*/web-report/ 
+karikatur-app/constants/variables.js

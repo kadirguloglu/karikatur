@@ -15,3 +15,7 @@ D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-ap
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\karikatur-db.dll
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\karikatur-db.pdb
 D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.csproj.CopyComplete
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\appsettings.Development.json
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\appsettings.json
+D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.genruntimeconfig.cache

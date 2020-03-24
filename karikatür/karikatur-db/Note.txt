@@ -1,1 +1,2 @@
 ﻿Migration Db = Scaffold-DbContext "Data Source=94.73.150.3;Initial Catalog=u7665680_dbF7D; User Id=u7665680_userF7D;Password=AEtx19I1" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f -Context KarikaturContext
+dotnet ef dbcontext scaffold "Data Source=94.73.150.3;Initial Catalog=u7665680_dbF7D; User Id=u7665680_userF7D;Password=AEtx19I1" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -f -Context KarikaturContext
