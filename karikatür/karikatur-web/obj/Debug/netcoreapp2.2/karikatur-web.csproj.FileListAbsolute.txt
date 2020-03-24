@@ -65,3 +65,8 @@ D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\_ViewImports.cshtml.g.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\_ViewStart.cshtml.g.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\karikatur-web.genruntimeconfig.cache
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Create.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Delete.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Details.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Edit.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Index.cshtml.g.cs

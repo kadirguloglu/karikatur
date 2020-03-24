@@ -3001,6 +3001,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Settings\\Details.cshtml",
+      "TargetPath": "Views\\Settings\\Details.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "TargetPath": "Views\\Shared\\_ValidationScriptsPartial.cshtml",
       "FileKind": "mvc"
@@ -3013,6 +3018,11 @@
     {
       "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Create.cshtml",
       "TargetPath": "Views\\Drawers\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Settings\\Delete.cshtml",
+      "TargetPath": "Views\\Settings\\Delete.cshtml",
       "FileKind": "mvc"
     },
     {
@@ -3111,6 +3121,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Settings\\Edit.cshtml",
+      "TargetPath": "Views\\Settings\\Edit.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Drawers\\Edit.cshtml",
       "TargetPath": "Views\\Drawers\\Edit.cshtml",
       "FileKind": "mvc"
@@ -3141,6 +3156,11 @@
       "FileKind": "mvc"
     },
     {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Settings\\Index.cshtml",
+      "TargetPath": "Views\\Settings\\Index.cshtml",
+      "FileKind": "mvc"
+    },
+    {
       "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Users\\Edit.cshtml",
       "TargetPath": "Views\\Users\\Edit.cshtml",
       "FileKind": "mvc"
@@ -3148,6 +3168,11 @@
     {
       "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\CartoonLikes\\Create.cshtml",
       "TargetPath": "Views\\CartoonLikes\\Create.cshtml",
+      "FileKind": "mvc"
+    },
+    {
+      "FilePath": "d:\\Proje\\Karikatur\\karikatür\\karikatur-web\\Views\\Settings\\Create.cshtml",
+      "TargetPath": "Views\\Settings\\Create.cshtml",
       "FileKind": "mvc"
     },
     {

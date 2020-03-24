@@ -39,15 +39,6 @@ import {
   adMobVideoAdsCode
 } from "../constants/variables";
 
-// AdMobInterstitial.setAdUnitID("ca-app-pub-2691089291450682/1466803456");
-// AdMobInterstitial.setTestDeviceID("EMULATOR");
-// await AdMobInterstitial.requestAdAsync();
-// await AdMobInterstitial.showAdAsync();
-
-// const imageWebPageUrl = "http://karikatur-admin.antiquemedia.xyz";
-// const adMobBannerCode = "ca-app-pub-2691089291450682/2988656739";
-// const adMobVideoAdsCode = "ca-app-pub-2691089291450682/1466803456";
-
 const themeColor = "#ff487e";
 
 const { width, height } = Dimensions.get("window");

@@ -87,7 +87,7 @@ namespace karikatur_api.Controllers
             }
             catch (Exception ex)
             {
-                throw ex;
+                return ex.Message;
             }
         }
 

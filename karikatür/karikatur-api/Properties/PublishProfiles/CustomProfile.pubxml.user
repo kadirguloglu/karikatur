@@ -20,13 +20,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>09/24/2019 19:58:14</publishTime>
     </File>
     <File Include="karikatur-api.deps.json">
-      <publishTime>03/24/2020 15:55:42</publishTime>
+      <publishTime>03/24/2020 16:45:47</publishTime>
     </File>
     <File Include="karikatur-api.dll">
-      <publishTime>03/24/2020 15:55:42</publishTime>
+      <publishTime>03/24/2020 16:45:46</publishTime>
     </File>
     <File Include="karikatur-api.pdb">
-      <publishTime>03/24/2020 15:55:42</publishTime>
+      <publishTime>03/24/2020 16:45:46</publishTime>
     </File>
     <File Include="karikatur-api.runtimeconfig.json">
       <publishTime>03/24/2020 15:42:29</publishTime>
@@ -107,7 +107,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/10/2019 10:25:19</publishTime>
     </File>
     <File Include="web.config">
-      <publishTime>03/24/2020 15:55:42</publishTime>
+      <publishTime>03/24/2020 16:45:47</publishTime>
     </File>
   </ItemGroup>
 </Project>
