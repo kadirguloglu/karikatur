@@ -5,7 +5,6 @@ D:\Proje\Karikatur\karikatür\karikatur-web\bin\Debug\netcoreapp2.2\karikatur-we
 D:\Proje\Karikatur\karikatür\karikatur-web\bin\Debug\netcoreapp2.2\karikatur-web.pdb
 D:\Proje\Karikatur\karikatür\karikatur-web\bin\Debug\netcoreapp2.2\karikatur-web.Views.dll
 D:\Proje\Karikatur\karikatür\karikatur-web\bin\Debug\netcoreapp2.2\karikatur-web.Views.pdb
-D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\karikatur-web.csproj.CoreCompileInputs.cache
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\karikatur-web.RazorAssemblyInfo.cache
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\karikatur-web.RazorAssemblyInfo.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\karikatur-web.AssemblyInfoInputs.cache
@@ -80,3 +79,4 @@ D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Details.cshtml.g.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Edit.cshtml.g.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Index.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\karikatur-web.csproj.CoreCompileInputs.cache

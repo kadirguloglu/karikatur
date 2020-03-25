@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +16,12 @@ namespace karikatur_web.Controllers
     public class LoginController : Controller
     {
         private readonly KarikaturContext _context;
+        private readonly IHostingEnvironment _env;
 
-        public LoginController(KarikaturContext context)
+        public LoginController(KarikaturContext context, IHostingEnvironment env)
         {
             _context = context;
+            _env = env;
         }
 
         public IActionResult Index(int pageType = -1, string Email = "", bool GetPassword = false, string ErrorText = "")
@@ -33,6 +36,10 @@ namespace karikatur_web.Controllers
         [HttpPost]
         public async Task<ActionResult> SendPassword(Users users)
         {
+            if (_env.IsDevelopment())
+            {
+                return RedirectToAction("Index", new { pageType = 0, Email = users.Email, GetPassword = true });
+            }
             var password = Guid.NewGuid();
             var user = _context.Users.FirstOrDefault(x => x.Email == users.Email);
             if (user != null && !string.IsNullOrEmpty(user.Email))
@@ -81,11 +88,11 @@ namespace karikatur_web.Controllers
             var user = _context.Users.FirstOrDefault(x => x.Email == users.Email);
             if (user != null && !string.IsNullOrEmpty(user.Email))
             {
-                if (DateTime.Now > user.PasswordExpirationDate)
+                if (DateTime.Now > user.PasswordExpirationDate && !_env.IsDevelopment())
                 {
                     return RedirectToAction("Index", new { pageType = 4, Email = users.Email, GetPassword = false });
                 }
-                if (users.Password == user.Password)
+                if (users.Password == user.Password || _env.IsDevelopment())
                 {
                     var claims = new List<Claim>();
 

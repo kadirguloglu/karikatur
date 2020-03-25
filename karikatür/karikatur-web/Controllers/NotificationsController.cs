@@ -1,12 +1,14 @@
-﻿using System;
+﻿using karikatur_db.ComplexType;
+using karikatur_db.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using Newtonsoft.Json;
+using RestSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using karikatur_db.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace karikatur_web.Controllers
 {
@@ -55,16 +57,48 @@ namespace karikatur_web.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Title,Description")] Notification notification)
+        public async Task<IActionResult> Create(SendNotificationCpx notification)
         {
-            if (ModelState.IsValid)
+            notification.Id = Guid.NewGuid();
+            _context.Add(notification);
+            var result = await _context.SaveChangesAsync();
+            if (result > 0)
             {
-                notification.Id = Guid.NewGuid();
-                _context.Add(notification);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                List<NotificationToken> tokenList = new List<NotificationToken>();
+                var query = _context.NotificationToken.AsQueryable();
+                if (notification.IsOnlyAndroid)
+                {
+                    query = query.Where(x => x.Platform == "android");
+                    if (notification.LastLoginWithDate != 0)
+                    {
+                        query = query.Where(x => x.UpdateDate.AddDays(notification.LastLoginWithDate) < DateTime.Now);
+                    }
+                }
+                else
+                {
+                    if (notification.LastLoginWithDate != 0)
+                    {
+                        query = query.Where(x => x.UpdateDate.AddDays(notification.LastLoginWithDate) < DateTime.Now);
+                    }
+                }
+                tokenList = await query.ToListAsync();
+                if (tokenList.Count > 0)
+                {
+                    RestClient client = new RestClient("https://exp.host/--/api/v2/push/send");
+                    var request = new RestRequest(Method.POST);
+                    client.Timeout = -1;
+                    request.AddHeader("content-type", "application/json");
+                    request.AddParameter("application/json", JsonConvert.SerializeObject(new
+                    {
+                        to = tokenList.Select(x => x.Token).ToArray(),
+                        title = notification.Title,
+                        body = notification.Description,
+                        sound = "default"
+                    }), ParameterType.RequestBody);
+                    IRestResponse response = client.Execute(request);
+                }
             }
-            return View(notification);
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: Notifications/Edit/5

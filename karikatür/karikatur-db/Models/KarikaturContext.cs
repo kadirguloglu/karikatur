@@ -302,6 +302,10 @@ namespace karikatur_db.Models
             {
                 entity.Property(e => e.Id).ValueGeneratedNever();
 
+                entity.Property(e => e.CreateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.Description)
                     .IsRequired()
                     .HasMaxLength(300);

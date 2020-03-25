@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "j3cTbPjEZBGfkD0c58pBv7d+N9GFJgy73BJ2wgxqpT3OD4Hn2Cufn80U+l755V9hWx1pI/OK0crlkHnj9dGNxQ==",
+  "dgSpecHash": "/Vj1RxjHycSpy6+Q8Jwf0fZ2RvYX2mWj7MsOtGoVqlFhkBBPUNNZQzCdfTU5ghpClHtYz9FPB/ia08ImqWiR+Q==",
   "success": true,
   "projectFilePath": "D:\\Proje\\Karikatur\\karikatür\\karikatur-web\\karikatur-web.csproj",
   "expectedPackageFiles": [
@@ -190,6 +190,7 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\newtonsoft.json.bson\\1.0.1\\newtonsoft.json.bson.1.0.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\remotion.linq\\2.2.0\\remotion.linq.2.2.0.nupkg.sha512",
+    "C:\\Users\\teah_\\.nuget\\packages\\restsharp\\106.10.1\\restsharp.106.10.1.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.debian.8-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.23-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl\\4.3.0\\runtime.fedora.24-x64.runtime.native.system.security.cryptography.openssl.4.3.0.nupkg.sha512",
