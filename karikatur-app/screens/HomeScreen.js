@@ -36,10 +36,9 @@ import { getCartoons, postCartoonLikes } from "../src/actions/cartoonService";
 import {
   imageWebPageUrl,
   adMobBannerCode,
-  adMobVideoAdsCode
+  adMobVideoAdsCode,
+  themeColor
 } from "../constants/variables";
-
-const themeColor = "#ff487e";
 
 const { width, height } = Dimensions.get("window");
 
@@ -52,7 +51,6 @@ const BottomAds = ({}) => {
         <AdMobBanner
           bannerSize="banner"
           adUnitID={adMobBannerCode} // Test ID, Replace with your-admob-unit-id
-          testDeviceID="EMULATOR"
           onDidFailToReceiveAdWithError={bannerError}
         />
       </View>
@@ -175,7 +173,6 @@ function HomeScreen() {
             <AdMobBanner
               bannerSize="mediumRectangle"
               adUnitID={adMobBannerCode}
-              testDeviceID="EMULATOR"
             />
           </CardItem>
         </Card>
@@ -296,9 +293,6 @@ function HomeScreen() {
   const _handlePressSaveCartoon = async () => {
     setSpinnerDownloadAdMobRewarded(true);
     AdMobRewarded.setAdUnitID(adMobVideoAdsCode);
-    if (__DEV__) {
-      AdMobRewarded.setTestDeviceID("EMULATOR");
-    }
     await AdMobRewarded.requestAdAsync();
     await AdMobRewarded.showAdAsync();
   };

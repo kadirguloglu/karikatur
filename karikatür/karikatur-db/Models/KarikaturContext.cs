@@ -323,9 +323,17 @@ namespace karikatur_db.Models
                     .IsRequired()
                     .HasMaxLength(350);
 
+                entity.Property(e => e.Platform)
+                    .IsRequired()
+                    .HasMaxLength(20);
+
                 entity.Property(e => e.Token)
                     .IsRequired()
                     .HasMaxLength(350);
+
+                entity.Property(e => e.UpdateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
             });
 
             modelBuilder.Entity<Settings>(entity =>

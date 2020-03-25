@@ -77,6 +77,10 @@ namespace karikatur_api.Controllers
         {
             if (await _context.NotificationToken.AnyAsync(x => x.Device == notificationToken.Device))
             {
+                NotificationToken result = await _context.NotificationToken.FirstOrDefaultAsync(x => x.Device == notificationToken.Device);
+                result.UpdateDate = DateTime.Now;
+                _context.Entry(result).State = EntityState.Modified;
+                await _context.SaveChangesAsync();
                 return -2;
             }
             _context.NotificationToken.Add(notificationToken);

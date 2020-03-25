@@ -70,3 +70,13 @@ D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Details.cshtml.g.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Edit.cshtml.g.cs
 D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Settings\Index.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Create.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Delete.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Details.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Edit.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\Notifications\Index.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Create.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Delete.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Details.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Edit.cshtml.g.cs
+D:\Proje\Karikatur\karikatür\karikatur-web\obj\Debug\netcoreapp2.2\Razor\Views\NotificationTokens\Index.cshtml.g.cs

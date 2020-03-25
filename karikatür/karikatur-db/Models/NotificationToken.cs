@@ -9,5 +9,7 @@ namespace karikatur_db.Models
         public string Token { get; set; }
         public string Device { get; set; }
         public DateTime CreateDate { get; set; }
+        public string Platform { get; set; }
+        public DateTime UpdateDate { get; set; }
     }
 }
