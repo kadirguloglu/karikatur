@@ -31,12 +31,14 @@ import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
 import Constants from "expo-constants";
 import * as FileSystem from "expo-file-system";
 import * as Permissions from "expo-permissions";
+import * as MediaLibrary from "expo-media-library";
 
 import { getCartoons, postCartoonLikes } from "../src/actions/cartoonService";
 import {
   imageWebPageUrl,
   adMobBannerCode,
   adMobVideoAdsCode,
+  adMobAwardAdsCode,
   themeColor
 } from "../constants/variables";
 
@@ -57,7 +59,7 @@ const BottomAds = ({}) => {
     </View>
   );
 };
-
+let currentCartoon = null;
 function HomeScreen() {
   const dispatch = useDispatch();
   const _deckSwiper = useRef();
@@ -95,15 +97,18 @@ function HomeScreen() {
         }, 5000);
       }
 
-      AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () =>
-        setIsWatchingVideo(true)
-      );
-      AdMobRewarded.addEventListener("rewardedVideoDidLoad", () =>
-        setIsWatchingVideo(false)
-      );
-      AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () =>
-        console.log("rewardedVideoDidFailToLoad")
-      );
+      AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
+        setIsWatchingVideo(true);
+      });
+      AdMobRewarded.addEventListener("rewardedVideoDidLoad", () => {
+        setIsWatchingVideo(false);
+      });
+      AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
+        setIsWatchingVideo(false);
+      });
+      AdMobRewarded.addEventListener("rewardedVideoDidComplete", () => {
+        setIsWatchingVideo(true);
+      });
       AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
         setSpinnerDownloadAdMobRewarded(false)
       );
@@ -111,8 +116,9 @@ function HomeScreen() {
       AdMobRewarded.addEventListener("rewardedVideoDidClose", () =>
         _handleDownloadCartoon()
       );
+
       AdMobRewarded.addEventListener("rewardedVideoWillLeaveApplication", () =>
-        console.log("rewardedVideoWillLeaveApplication")
+        setIsWatchingVideo(false)
       );
     }
     initPage();
@@ -121,33 +127,39 @@ function HomeScreen() {
 
   const _handleDownloadCartoon = () => {
     try {
-      const imageUrl = imageWebPageUrl + cartoons[0].CartoonImages[0].ImageSrc;
-      const splitUrl = imageUrl.split("/");
-      const fileName = splitUrl[splitUrl.length - 1];
-      FileSystem.downloadAsync(
-        imageUrl,
-        FileSystem.documentDirectory + fileName
-      )
-        .then(({ uri }) => {
-          Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
-            if (status === "granted") {
-              CameraRoll.saveToCameraRoll(uri).then(uriGallery => {
-                let alertText = "Karikatür Kaydedildi.";
-                if (isWatchingVideo) {
-                  alertText +=
-                    " Videoyu izleyip bize destek olduğunuz için teşekkür ederiz.";
-                } else {
-                  alertText +=
-                    " Videoları izleyerek bize desktek olabilirisiniz.";
-                }
-                alert(alertText);
-              });
-            }
+      const imageUrl =
+        imageWebPageUrl + currentCartoon[0].CartoonImages[0].ImageSrc;
+      if (imageUrl) {
+        const splitUrl = imageUrl.split("/");
+        let rnd = parseInt(Math.random() * 1000000000000) + "";
+        const fileName = rnd + splitUrl[splitUrl.length - 1];
+        FileSystem.downloadAsync(
+          imageUrl,
+          FileSystem.documentDirectory + fileName
+        )
+          .then(({ uri }) => {
+            Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
+              if (status === "granted") {
+                MediaLibrary.saveToLibraryAsync(uri).then(uriGallery => {
+                  let alertText = "Karikatür Kaydedildi.";
+                  if (isWatchingVideo) {
+                    alertText +=
+                      " Videoyu izleyip bize destek olduğunuz için teşekkür ederiz.";
+                  } else {
+                    alertText +=
+                      " Videoları izleyerek bize desktek olabilirisiniz.";
+                  }
+                  alert(alertText);
+                });
+              }
+            });
+          })
+          .catch(error => {
+            console.error(error);
           });
-        })
-        .catch(error => {
-          console.error(error);
-        });
+      } else {
+        alert("Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz.");
+      }
     } catch (error) {
       alert("Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz.");
     }
@@ -208,6 +220,8 @@ function HomeScreen() {
           if (payload.data) {
             if (payload.data.length) {
               payloadItem = payload.data;
+              currentCartoon = payloadItem;
+              setCartoons(payloadItem);
             }
           }
         }
@@ -255,7 +269,7 @@ function HomeScreen() {
                     letCartoonItem && {
                       uri:
                         imageWebPageUrl +
-                        letCartoonItem.CartoonImages[0].ImageSrc
+                        letCartoonItem?.CartoonImages[0].ImageSrc
                     }
                   }
                   resizeMode="contain"
@@ -267,7 +281,6 @@ function HomeScreen() {
         let newPage = page + appendPage;
         AsyncStorage.setItem("@page", newPage + "");
         setDeckElement(_dataObject);
-        setCartoons(payloadItem);
         setPage(newPage);
         setLikeButton(true);
       });
@@ -292,7 +305,7 @@ function HomeScreen() {
 
   const _handlePressSaveCartoon = async () => {
     setSpinnerDownloadAdMobRewarded(true);
-    AdMobRewarded.setAdUnitID(adMobVideoAdsCode);
+    AdMobRewarded.setAdUnitID(adMobAwardAdsCode);
     await AdMobRewarded.requestAdAsync();
     await AdMobRewarded.showAdAsync();
   };
@@ -317,7 +330,7 @@ function HomeScreen() {
               style={{
                 color: themeColor
               }}
-              name={cartoons[0].IsLiked ? "ios-star" : "ios-star-outline"}
+              name={cartoons[0]?.IsLiked ? "ios-star" : "ios-star-outline"}
             />
           </Button>
         </View>
@@ -395,7 +408,7 @@ function HomeScreen() {
             currentPage={0}
             // onAnimateNextPage={p => console.log(p)}
           >
-            {cartoons[0].CartoonImages.map((el, i) => (
+            {cartoons[0]?.CartoonImages.map((el, i) => (
               <View style={style.modalImageContainer} key={"image" + i}>
                 <Image
                   style={{ height: height, width: width }}
