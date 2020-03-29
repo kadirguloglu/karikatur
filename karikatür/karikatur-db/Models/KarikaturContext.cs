@@ -23,14 +23,20 @@ namespace karikatur_db.Models
         public virtual DbSet<CategoryStories> CategoryStories { get; set; }
         public virtual DbSet<CategoryVideos> CategoryVideos { get; set; }
         public virtual DbSet<Drawer> Drawer { get; set; }
+        public virtual DbSet<EzanVakitBildirim> EzanVakitBildirim { get; set; }
+        public virtual DbSet<IlceBayramNamazi> IlceBayramNamazi { get; set; }
+        public virtual DbSet<Ilceler> Ilceler { get; set; }
         public virtual DbSet<Languages> Languages { get; set; }
         public virtual DbSet<Notification> Notification { get; set; }
         public virtual DbSet<NotificationToken> NotificationToken { get; set; }
+        public virtual DbSet<Sehirler> Sehirler { get; set; }
         public virtual DbSet<Settings> Settings { get; set; }
         public virtual DbSet<StarVideos> StarVideos { get; set; }
         public virtual DbSet<Stars> Stars { get; set; }
         public virtual DbSet<Stories> Stories { get; set; }
+        public virtual DbSet<Ulkeler> Ulkeler { get; set; }
         public virtual DbSet<Users> Users { get; set; }
+        public virtual DbSet<Vakitler> Vakitler { get; set; }
         public virtual DbSet<VideoTagVideos> VideoTagVideos { get; set; }
         public virtual DbSet<VideoTags> VideoTags { get; set; }
         public virtual DbSet<Videos> Videos { get; set; }
@@ -283,6 +289,57 @@ namespace karikatur_db.Models
                     .HasMaxLength(250);
             });
 
+            modelBuilder.Entity<EzanVakitBildirim>(entity =>
+            {
+                entity.Property(e => e.Id).ValueGeneratedNever();
+
+                entity.HasOne(d => d.NotificationToken)
+                    .WithMany(p => p.EzanVakitBildirim)
+                    .HasForeignKey(d => d.NotificationTokenId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_EzanVakitBildirim_NotificationToken");
+            });
+
+            modelBuilder.Entity<IlceBayramNamazi>(entity =>
+            {
+                entity.Property(e => e.IlceId).HasColumnName("IlceID");
+
+                entity.Property(e => e.KurbanBayramNamaziHtarihi)
+                    .HasColumnName("KurbanBayramNamaziHTarihi")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.KurbanBayramNamaziSaati).HasMaxLength(30);
+
+                entity.Property(e => e.KurbanBayramNamaziTarihi).HasMaxLength(30);
+
+                entity.Property(e => e.LastUpdateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.RamazanBayramNamaziHtarihi)
+                    .HasColumnName("RamazanBayramNamaziHTarihi")
+                    .HasMaxLength(30);
+
+                entity.Property(e => e.RamazanBayramNamaziSaati).HasMaxLength(30);
+
+                entity.Property(e => e.RamazanBayramNamaziTarihi).HasMaxLength(30);
+            });
+
+            modelBuilder.Entity<Ilceler>(entity =>
+            {
+                entity.Property(e => e.IlceAdi).HasMaxLength(150);
+
+                entity.Property(e => e.IlceAdiEn).HasMaxLength(150);
+
+                entity.Property(e => e.IlceId).HasColumnName("IlceID");
+
+                entity.Property(e => e.LastUpdateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.SehirId).HasColumnName("SehirID");
+            });
+
             modelBuilder.Entity<Languages>(entity =>
             {
                 entity.Property(e => e.Code)
@@ -338,6 +395,26 @@ namespace karikatur_db.Models
                 entity.Property(e => e.UpdateDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+
+                entity.HasOne(d => d.Settings)
+                    .WithMany(p => p.NotificationToken)
+                    .HasForeignKey(d => d.SettingsId)
+                    .HasConstraintName("FK_NotificationToken_Settings");
+            });
+
+            modelBuilder.Entity<Sehirler>(entity =>
+            {
+                entity.Property(e => e.LastUpdateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.SehirAdi).HasMaxLength(150);
+
+                entity.Property(e => e.SehirAdiEn).HasMaxLength(150);
+
+                entity.Property(e => e.SehirId).HasColumnName("SehirID");
+
+                entity.Property(e => e.UlkeId).HasColumnName("UlkeID");
             });
 
             modelBuilder.Entity<Settings>(entity =>
@@ -388,6 +465,19 @@ namespace karikatur_db.Models
                 entity.Property(e => e.Title).IsRequired();
             });
 
+            modelBuilder.Entity<Ulkeler>(entity =>
+            {
+                entity.Property(e => e.LastUpdateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.UlkeAdi).HasMaxLength(150);
+
+                entity.Property(e => e.UlkeAdiEn).HasMaxLength(150);
+
+                entity.Property(e => e.UlkeId).HasColumnName("UlkeID");
+            });
+
             modelBuilder.Entity<Users>(entity =>
             {
                 entity.Property(e => e.Id).HasDefaultValueSql("(newid())");
@@ -401,6 +491,51 @@ namespace karikatur_db.Models
                 entity.Property(e => e.PasswordExpirationDate)
                     .HasColumnType("datetime")
                     .HasDefaultValueSql("(getdate())");
+            });
+
+            modelBuilder.Entity<Vakitler>(entity =>
+            {
+                entity.Property(e => e.Aksam).HasMaxLength(10);
+
+                entity.Property(e => e.AyinSekliUrl)
+                    .HasColumnName("AyinSekliURL")
+                    .HasMaxLength(150);
+
+                entity.Property(e => e.Gunes).HasMaxLength(10);
+
+                entity.Property(e => e.GunesBatis).HasMaxLength(10);
+
+                entity.Property(e => e.GunesDogus).HasMaxLength(10);
+
+                entity.Property(e => e.HicriTarihKisa).HasMaxLength(15);
+
+                entity.Property(e => e.HicriTarihUzun).HasMaxLength(20);
+
+                entity.Property(e => e.Ikindi).HasMaxLength(10);
+
+                entity.Property(e => e.IlceId).HasColumnName("IlceID");
+
+                entity.Property(e => e.Imsak).HasMaxLength(10);
+
+                entity.Property(e => e.KibleSaati).HasMaxLength(10);
+
+                entity.Property(e => e.LastUpdateDate)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
+                entity.Property(e => e.MiladiTarihKisa).HasMaxLength(15);
+
+                entity.Property(e => e.MiladiTarihKisaIso8601).HasMaxLength(20);
+
+                entity.Property(e => e.MiladiTarihUzun).HasMaxLength(30);
+
+                entity.Property(e => e.MiladiTarihUzunIso8601).HasColumnType("datetime");
+
+                entity.Property(e => e.Ogle)
+                    .IsRequired()
+                    .HasMaxLength(10);
+
+                entity.Property(e => e.Yatsi).HasMaxLength(10);
             });
 
             modelBuilder.Entity<VideoTagVideos>(entity =>

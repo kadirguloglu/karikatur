@@ -75,6 +75,14 @@ namespace karikatur_api.Controllers
         [HttpPost]
         public async Task<object> PostNotificationToken(NotificationToken notificationToken)
         {
+            try
+            {
+                notificationToken.SettingsId = (await _context.Settings.FirstOrDefaultAsync(x => x.ProjectKey == "KarikaturMadeni")).Id;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
             if (await _context.NotificationToken.AnyAsync(x => x.Device == notificationToken.Device))
             {
                 NotificationToken result = await _context.NotificationToken.FirstOrDefaultAsync(x => x.Device == notificationToken.Device);

@@ -64,7 +64,7 @@ namespace karikatur_web.Controllers
             var result = await _context.SaveChangesAsync();
             if (result > 0)
             {
-                List<NotificationToken> tokenList = new List<NotificationToken>();
+                string[] tokenList = new string[] { };
                 var query = _context.NotificationToken.AsQueryable();
                 if (notification.IsOnlyAndroid)
                 {
@@ -81,8 +81,9 @@ namespace karikatur_web.Controllers
                         query = query.Where(x => x.UpdateDate.AddDays(notification.LastLoginWithDate) < DateTime.Now);
                     }
                 }
-                tokenList = await query.ToListAsync();
-                if (tokenList.Count > 0)
+                query.Where(x => x.Settings.ProjectKey == "KarikaturMadeni");
+                tokenList = await query.Select(x => x.Token).ToArrayAsync();
+                if (tokenList.Length > 0)
                 {
                     RestClient client = new RestClient("https://exp.host/--/api/v2/push/send");
                     var request = new RestRequest(Method.POST);
@@ -90,7 +91,7 @@ namespace karikatur_web.Controllers
                     request.AddHeader("content-type", "application/json");
                     request.AddParameter("application/json", JsonConvert.SerializeObject(new
                     {
-                        to = tokenList.Select(x => x.Token).ToArray(),
+                        to = tokenList,
                         title = notification.Title,
                         body = notification.Description,
                         sound = "default"

@@ -21,24 +21,32 @@ namespace karikatur_api.Controllers
         }
 
         // GET: api/CartoonLikes
-        [HttpGet]
-        public async Task<ActionResult<IEnumerable<CartoonLikes>>> GetCartoonLikes()
+        [HttpGet("{uniqUserKey}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetCartoonLikes(string uniqUserKey)
         {
-            return await _context.CartoonLikes.ToListAsync();
-        }
-
-        // GET: api/CartoonLikes/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<CartoonLikes>> GetCartoonLikes(Guid id)
-        {
-            var cartoonLikes = await _context.CartoonLikes.FindAsync(id);
-
-            if (cartoonLikes == null)
-            {
-                return NotFound();
-            }
-
-            return cartoonLikes;
+            return await _context.Cartoon
+                .OrderByDescending(x => x.Rank)
+                .Include(x => x.CartoonImages)
+                .Include(x => x.Drawers)
+                .Include(x => x.CartoonLikes)
+                .Where(x => x.CartoonLikes.Any(y => y.UniqUserKey == uniqUserKey))
+                .ToAsyncEnumerable().Select(x =>
+                {
+                    var likeCount = x.CartoonLikes.Count();
+                    var getLike = x.CartoonLikes.FirstOrDefault(y => y.UniqUserKey == uniqUserKey);
+                    var likeId = new Guid();
+                    if (getLike != null) likeId = getLike.Id;
+                    return new
+                    {
+                        x.Id,
+                        x.Drawers.LogoSrc,
+                        x.Drawers.Name,
+                        x.DrawersId,
+                        CartoonImages = x.CartoonImages.Select(y => new { y.ImageSrc, y.Rank }).OrderByDescending(y => y.Rank),
+                        LikeCount = likeCount,
+                        LikeId = likeId
+                    };
+                }).ToList();
         }
 
         // PUT: api/CartoonLikes/5

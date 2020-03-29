@@ -2,7 +2,6 @@ D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\karikatur-ap
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\karikatur-api.runtimeconfig.json
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\karikatur-api.runtimeconfig.dev.json
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\karikatur-api.dll
-D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.csproj.CoreCompileInputs.cache
 D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.RazorAssemblyInfo.cache
 D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.RazorAssemblyInfo.cs
 D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.AssemblyInfoInputs.cache
@@ -19,3 +18,4 @@ D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\appsettings.
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\appsettings.json
 D:\Proje\Karikatur\karikatür\karikatur-api\bin\Debug\netcoreapp2.2\Properties\launchSettings.json
 D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.genruntimeconfig.cache
+D:\Proje\Karikatur\karikatür\karikatur-api\obj\Debug\netcoreapp2.2\karikatur-api.csproj.CoreCompileInputs.cache

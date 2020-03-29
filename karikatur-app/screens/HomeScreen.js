@@ -215,6 +215,7 @@ function HomeScreen() {
       if (cartoons) {
         payloadItem = cartoons;
       }
+      AsyncStorage.setItem("@page", page + "");
       dispatch(getCartoons(page, 1, Constants.deviceId)).then(({ payload }) => {
         if (payload) {
           if (payload.data) {
@@ -222,6 +223,7 @@ function HomeScreen() {
               payloadItem = payload.data;
               currentCartoon = payloadItem;
               setCartoons(payloadItem);
+              AsyncStorage.setItem("@page", page + "");
             }
           }
         }
@@ -279,7 +281,7 @@ function HomeScreen() {
           </Card>
         );
         let newPage = page + appendPage;
-        AsyncStorage.setItem("@page", newPage + "");
+        AsyncStorage.setItem("@page", page + "");
         setDeckElement(_dataObject);
         setPage(newPage);
         setLikeButton(true);
