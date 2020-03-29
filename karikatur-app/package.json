@@ -34,6 +34,7 @@
     "react-native-looped-carousel": "^0.1.13",
     "react-native-share": "^3.0.0",
     "react-native-status-bar-height": "^2.4.0",
+    "react-native-super-grid": "^3.1.2",
     "react-native-unimodules": "^0.7.0",
     "react-native-web": "^0.12.1",
     "react-navigation": "^4.1.1",

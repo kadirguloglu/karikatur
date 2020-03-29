@@ -59,8 +59,20 @@ const BottomAds = ({}) => {
     </View>
   );
 };
+
+const MenuIcon = React.memo(({ navigation }) => {
+  return (
+    <Icon
+      name="list"
+      color={themeColor}
+      style={{ color: themeColor }}
+      onPress={() => navigation.navigate("LikeCartoons")}
+    />
+  );
+});
+
 let currentCartoon = null;
-function HomeScreen() {
+function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const _deckSwiper = useRef();
   const [modalVisible, setModalVisible] = useState(false);
@@ -122,7 +134,18 @@ function HomeScreen() {
       );
     }
     initPage();
-    return () => {};
+    return () => {
+      try {
+        AdMobRewarded.removeAllListeners();
+        AdMobRewarded.removeEventListener("rewardedVideoDidRewardUser");
+        AdMobRewarded.removeEventListener("rewardedVideoDidLoad");
+        AdMobRewarded.removeEventListener("rewardedVideoDidFailToLoad");
+        AdMobRewarded.removeEventListener("rewardedVideoDidOpen");
+        AdMobRewarded.removeEventListener("rewardedVideoDidClose");
+        AdMobRewarded.removeEventListener("rewardedVideoWillLeaveApplication");
+        AdMobRewarded.removeEventListener("rewardedVideoDidComplete");
+      } catch (error) {}
+    };
   }, []);
 
   const _handleDownloadCartoon = () => {
@@ -172,6 +195,7 @@ function HomeScreen() {
         <Card style={{ elevation: 3 }}>
           <CardItem>
             <Left>
+              <MenuIcon navigation={navigation} />
               <Thumbnail
                 source={require("../assets/images/icon.png")}
                 circular
@@ -196,6 +220,7 @@ function HomeScreen() {
         <Card style={{ elevation: 3 }}>
           <CardItem>
             <Left>
+              <MenuIcon navigation={navigation} />
               <Thumbnail
                 source={require("../assets/images/icon.png")}
                 circular
@@ -235,6 +260,7 @@ function HomeScreen() {
           <Card style={{ elevation: 3 }}>
             <CardItem>
               <Left>
+                <MenuIcon navigation={navigation} />
                 {letCartoonItem &&
                 letCartoonItem.LogoSrc != null &&
                 letCartoonItem.LogoSrc.length ? (

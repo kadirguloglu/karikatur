@@ -5,7 +5,7 @@
     "privacy": "public",
     "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
-    "version": "7.3.1",
+    "version": "7.4.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "splash": {
@@ -23,7 +23,7 @@
     },
     "android": {
       "package": "com.antiqmedia.karikaturmadeni",
-      "versionCode": 16,
+      "versionCode": 17,
       "icon": "./assets/images/icon.png"
     },
     "description": ""
