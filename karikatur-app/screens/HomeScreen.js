@@ -72,12 +72,12 @@ const MenuIcon = React.memo(({ navigation }) => {
 });
 
 let currentCartoon = null;
+let page = 1;
 function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const _deckSwiper = useRef();
   const [modalVisible, setModalVisible] = useState(false);
   const [swiperPage, setSwiperPage] = useState(1);
-  const [page, setPage] = useState(1);
   const [deckElement, setDeckElement] = useState(null);
   const [cartoons, setCartoons] = useState(null);
   const [likeButton, setLikeButton] = useState(true);
@@ -89,25 +89,29 @@ function HomeScreen({ navigation }) {
   const [isWatchingVideo, setIsWatchingVideo] = useState(false);
 
   useEffect(() => {
-    async function initPage() {
-      let storePage = await AsyncStorage.getItem("@page");
-      storePage = storePage == null ? 1 : storePage;
-      setPage(parseInt(storePage));
-      _handleSwipeCartoonItem(1);
-      const storageGetPreview = await AsyncStorage.getItem("@getPreview");
-      let storeData = storageGetPreview
-        ? storageGetPreview === "1"
-          ? false
-          : true
-        : true;
-      setGetPreview(storeData);
-
-      if (storeData) {
+    function initPage() {
+      AsyncStorage.getItem("@page").then(storagePage => {
+        const storePage = storagePage === null ? 1 : parseInt(storagePage);
+        page = storePage;
         setTimeout(() => {
-          setGetPreview(false);
-          AsyncStorage.setItem("@getPreview", "1");
-        }, 5000);
-      }
+          _handleSwipeCartoonItem(0);
+        }, 500);
+      });
+      AsyncStorage.getItem("@getPreview").then(storageGetPreview => {
+        let storeData = storageGetPreview
+          ? storageGetPreview === "1"
+            ? false
+            : true
+          : true;
+        setGetPreview(storeData);
+
+        if (storeData) {
+          setTimeout(() => {
+            setGetPreview(false);
+            AsyncStorage.setItem("@getPreview", "1");
+          }, 5000);
+        }
+      });
 
       AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
         setIsWatchingVideo(true);
@@ -240,78 +244,80 @@ function HomeScreen({ navigation }) {
       if (cartoons) {
         payloadItem = cartoons;
       }
-      AsyncStorage.setItem("@page", page + "");
-      dispatch(getCartoons(page, 1, Constants.deviceId)).then(({ payload }) => {
-        if (payload) {
-          if (payload.data) {
-            if (payload.data.length) {
-              payloadItem = payload.data;
-              currentCartoon = payloadItem;
-              setCartoons(payloadItem);
-              AsyncStorage.setItem("@page", page + "");
+
+      let newPage = parseInt(page) + parseInt(appendPage);
+      dispatch(getCartoons(newPage, 1, Constants.deviceId)).then(
+        ({ payload }) => {
+          if (payload) {
+            if (payload.data) {
+              if (payload.data.length) {
+                payloadItem = payload.data;
+                currentCartoon = payloadItem;
+                setCartoons(payloadItem);
+                AsyncStorage.setItem("@page", page + "");
+              }
             }
           }
-        }
-        let letCartoonItem;
-        if (payloadItem) {
-          letCartoonItem = payloadItem[0];
-        }
-        let _dataObject = (
-          <Card style={{ elevation: 3 }}>
-            <CardItem>
-              <Left>
-                <MenuIcon navigation={navigation} />
-                {letCartoonItem &&
-                letCartoonItem.LogoSrc != null &&
-                letCartoonItem.LogoSrc.length ? (
-                  <Thumbnail
-                    source={{
-                      uri: imageWebPageUrl + letCartoonItem.LogoSrc
-                    }}
-                    circular
-                  />
-                ) : null}
-                {letCartoonItem &&
-                letCartoonItem.Name != null &&
-                letCartoonItem.Name.length ? (
-                  <Body>
-                    <Text>{letCartoonItem.Name}</Text>
-                  </Body>
-                ) : null}
-              </Left>
-            </CardItem>
-            <CardItem cardBody>
-              <TouchableOpacity
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-                onPress={() => setModalVisible(true)}
-              >
-                <Image
-                  style={{ flex: 1, height: height * 0.7 }}
-                  source={
-                    letCartoonItem && {
-                      uri:
-                        imageWebPageUrl +
-                        letCartoonItem?.CartoonImages[0].ImageSrc
+          let letCartoonItem;
+          if (payloadItem) {
+            letCartoonItem = payloadItem[0];
+          }
+          let _dataObject = (
+            <Card style={{ elevation: 3 }}>
+              <CardItem>
+                <Left>
+                  <MenuIcon navigation={navigation} />
+                  {letCartoonItem &&
+                  letCartoonItem.LogoSrc != null &&
+                  letCartoonItem.LogoSrc.length ? (
+                    <Thumbnail
+                      source={{
+                        uri: imageWebPageUrl + letCartoonItem.LogoSrc
+                      }}
+                      circular
+                    />
+                  ) : null}
+                  {letCartoonItem &&
+                  letCartoonItem.Name != null &&
+                  letCartoonItem.Name.length ? (
+                    <Body>
+                      <Text>{letCartoonItem.Name}</Text>
+                    </Body>
+                  ) : null}
+                </Left>
+              </CardItem>
+              <CardItem cardBody>
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    flexDirection: "row",
+                    flexDirection: "row",
+                    justifyContent: "center",
+                    alignItems: "center"
+                  }}
+                  onPress={() => setModalVisible(true)}
+                >
+                  <Image
+                    style={{ flex: 1, height: height * 0.7 }}
+                    source={
+                      letCartoonItem && {
+                        uri:
+                          imageWebPageUrl +
+                          letCartoonItem?.CartoonImages[0].ImageSrc
+                      }
                     }
-                  }
-                  resizeMode="contain"
-                />
-              </TouchableOpacity>
-            </CardItem>
-          </Card>
-        );
-        let newPage = page + appendPage;
-        AsyncStorage.setItem("@page", page + "");
-        setDeckElement(_dataObject);
-        setPage(newPage);
-        setLikeButton(true);
-      });
+                    resizeMode="contain"
+                  />
+                </TouchableOpacity>
+              </CardItem>
+            </Card>
+          );
+          page = newPage;
+          AsyncStorage.setItem("@page", page + "");
+          setDeckElement(_dataObject);
+          setLikeButton(true);
+        }
+      );
     }
     setSwiperPage(swiperPage + 1);
   };
@@ -456,8 +462,8 @@ function HomeScreen({ navigation }) {
           renderItem={item => {
             return deckElement;
           }}
-          onSwipeRight={() => _handleSwipeCartoonItem(1)}
-          onSwipeLeft={() => _handleSwipeCartoonItem(-1)}
+          onSwipeRight={() => _handleSwipeCartoonItem(-1)}
+          onSwipeLeft={() => _handleSwipeCartoonItem(1)}
         />
       </View>
       {cartoons != null && likeButton ? <Buttons></Buttons> : null}
