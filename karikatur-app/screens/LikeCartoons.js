@@ -14,7 +14,6 @@ import {
   Button
 } from "native-base";
 import { Image, Dimensions, StyleSheet } from "react-native";
-import Constants from "expo-constants";
 import { useDispatch, useSelector } from "react-redux";
 import { FlatGrid } from "react-native-super-grid";
 import { AdMobRewarded } from "expo-ads-admob";
@@ -24,7 +23,8 @@ import {
   adMobBannerCode,
   adMobVideoAdsCode,
   adMobAwardAdsCode,
-  themeColor
+  themeColor,
+  uniqUserData
 } from "../constants/variables";
 
 import {
@@ -48,7 +48,7 @@ function LikeCartoons({ navigation }) {
   } = useSelector(x => x.cartoonServiceResponse);
 
   useEffect(() => {
-    dispatch(getMyCartoonLikes(Constants.deviceId));
+    dispatch(getMyCartoonLikes(uniqUserData));
     return () => {};
   }, []);
 
@@ -61,9 +61,6 @@ function LikeCartoons({ navigation }) {
     });
     AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
       setIsWatchingVideo(false);
-    });
-    AdMobRewarded.addEventListener("rewardedVideoDidComplete", () => {
-      setIsWatchingVideo(true);
     });
     AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
       setSpinnerDownloadAdMobRewarded(false)
@@ -85,7 +82,6 @@ function LikeCartoons({ navigation }) {
         AdMobRewarded.removeEventListener("rewardedVideoDidOpen");
         AdMobRewarded.removeEventListener("rewardedVideoDidClose");
         AdMobRewarded.removeEventListener("rewardedVideoWillLeaveApplication");
-        AdMobRewarded.removeEventListener("rewardedVideoDidComplete");
       } catch (error) {}
     };
   }, []);
@@ -124,18 +120,24 @@ function LikeCartoons({ navigation }) {
                       " Videoları izleyerek bize desktek olabilirisiniz.";
                   }
                   alert(alertText);
+                  setSpinnerDownloadAdMobRewarded(false);
                 });
               }
             });
           })
           .catch(error => {
-            console.error(error);
+            alert(
+              "Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz."
+            );
+            setSpinnerDownloadAdMobRewarded(false);
           });
       } else {
         alert("Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz.");
+        setSpinnerDownloadAdMobRewarded(false);
       }
     } catch (error) {
       alert("Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz.");
+      setSpinnerDownloadAdMobRewarded(false);
     }
   }
 
@@ -189,10 +191,10 @@ function LikeCartoons({ navigation }) {
                         postCartoonLikes({
                           Id: item.LikeId,
                           CartoonId: item.Id,
-                          UniqUserKey: Constants.deviceId
+                          UniqUserKey: uniqUserData
                         })
                       ).then(() => {
-                        dispatch(getMyCartoonLikes(Constants.deviceId));
+                        dispatch(getMyCartoonLikes(uniqUserData));
                       });
                     }}
                   >

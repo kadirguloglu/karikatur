@@ -1,30 +1,28 @@
+import React, { useState, useRef, useEffect } from "react";
+import {
+  Platform,
+  StatusBar,
+  StyleSheet,
+  View,
+  AsyncStorage
+} from "react-native";
 import { AppLoading } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
-import React, { useState } from "react";
-import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { NavigationContainer } from "@react-navigation/native";
+import { SplashScreen } from "expo";
+import Constants from "expo-constants";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import reducers from "./src/reducers";
 import { Provider } from "react-redux";
 import axios from "axios";
 import axiosMiddleware from "redux-axios-middleware";
-import logger from "redux-logger";
-import Sentry from "sentry-expo";
+import { changeUniqUserData } from "./constants/variables";
 
 import Main from "./screens/Main";
-
-// Sentry.config(
-//   "https://126f9bb1294345ffb7627dc5527e6fe0@sentry.io/1486156"
-// ).install();
-
-// Sentry.init({
-//   dsn: "https://126f9bb1294345ffb7627dc5527e6fe0@sentry.io/1486156",
-//   enableInExpoDevelopment: true,
-//   debug: true
-// });
+import useLinking from "./navigation/useLinking";
 
 const client = axios.create({
   baseURL: "http://karikatur-api.antiquemedia.xyz",
@@ -33,13 +31,11 @@ const client = axios.create({
 
 client.interceptors.request.use(request => {
   //alert("Request : " + JSON.stringify(request));
-  //console.log("Request : ", JSON.stringify(request));
   return request;
 });
 
 client.interceptors.response.use(response => {
   //alert("Response:", JSON.stringify(response));
-  //console.log("Response : ", JSON.stringify(response));
   return response;
 });
 
@@ -51,8 +47,46 @@ const store = createStore(
 
 export default function App(props) {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
+  const [initialNavigationState, setInitialNavigationState] = useState();
+  const [uniqValueLoading, setUniqValueLoading] = useState(true);
+  const containerRef = useRef();
+  const { getInitialState } = useLinking(containerRef);
 
-  if (!isLoadingComplete && !props.skipLoadingScreen) {
+  useEffect(() => {
+    async function loadResourcesAndDataAsync() {
+      try {
+        SplashScreen.preventAutoHide();
+        const uniqUserValue = await AsyncStorage.getItem("@uniqUserValue");
+        let uniqValue = uniqUserValue;
+        if (uniqUserValue === null) {
+          uniqValue =
+            Constants.sessionId + "" + parseInt(Math.random() * 1000000) + "";
+        }
+        await AsyncStorage.setItem("@uniqUserValue", uniqValue);
+        changeUniqUserData(uniqValue);
+        setUniqValueLoading(false);
+
+        // Load our initial navigation state
+        setInitialNavigationState(await getInitialState());
+
+        // Load fonts
+        await Font.loadAsync({
+          ...Ionicons.font,
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+        });
+      } catch (e) {
+        // We might want to provide this error information to an error reporting service
+        console.warn(e);
+      } finally {
+        setLoadingComplete(true);
+        SplashScreen.hide();
+      }
+    }
+
+    loadResourcesAndDataAsync();
+  }, []);
+
+  if (!isLoadingComplete && !props.skipLoadingScreen && uniqValueLoading) {
     return (
       <AppLoading
         startAsync={loadResourcesAsync}
@@ -63,9 +97,14 @@ export default function App(props) {
   } else {
     return (
       <View style={styles.container}>
-        {Platform.OS === "ios" && <StatusBar barStyle="default" />}
+        <StatusBar hidden />
         <Provider store={store}>
-          <Main />
+          <NavigationContainer
+            ref={containerRef}
+            initialState={initialNavigationState}
+          >
+            <Main />
+          </NavigationContainer>
         </Provider>
       </View>
     );
@@ -100,6 +139,7 @@ function handleFinishLoading(setLoadingComplete) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff"
+    backgroundColor: "#fff",
+    marginTop: Platform.OS === "ios" ? 0 : -StatusBar.currentHeight
   }
 });

@@ -28,7 +28,6 @@ import {
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import Carousel from "react-native-looped-carousel";
 import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
-import Constants from "expo-constants";
 import * as FileSystem from "expo-file-system";
 import * as Permissions from "expo-permissions";
 import * as MediaLibrary from "expo-media-library";
@@ -39,7 +38,8 @@ import {
   adMobBannerCode,
   adMobVideoAdsCode,
   adMobAwardAdsCode,
-  themeColor
+  themeColor,
+  uniqUserData
 } from "../constants/variables";
 
 const { width, height } = Dimensions.get("window");
@@ -122,9 +122,6 @@ function HomeScreen({ navigation }) {
       AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
         setIsWatchingVideo(false);
       });
-      AdMobRewarded.addEventListener("rewardedVideoDidComplete", () => {
-        setIsWatchingVideo(true);
-      });
       AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
         setSpinnerDownloadAdMobRewarded(false)
       );
@@ -147,7 +144,6 @@ function HomeScreen({ navigation }) {
         AdMobRewarded.removeEventListener("rewardedVideoDidOpen");
         AdMobRewarded.removeEventListener("rewardedVideoDidClose");
         AdMobRewarded.removeEventListener("rewardedVideoWillLeaveApplication");
-        AdMobRewarded.removeEventListener("rewardedVideoDidComplete");
       } catch (error) {}
     };
   }, []);
@@ -177,18 +173,24 @@ function HomeScreen({ navigation }) {
                       " Videoları izleyerek bize desktek olabilirisiniz.";
                   }
                   alert(alertText);
+                  setSpinnerDownloadAdMobRewarded(false);
                 });
               }
             });
           })
           .catch(error => {
-            console.error(error);
+            alert(
+              "Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz."
+            );
+            setSpinnerDownloadAdMobRewarded(false);
           });
       } else {
         alert("Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz.");
+        setSpinnerDownloadAdMobRewarded(false);
       }
     } catch (error) {
       alert("Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz.");
+      setSpinnerDownloadAdMobRewarded(false);
     }
   };
 
@@ -246,87 +248,85 @@ function HomeScreen({ navigation }) {
       }
 
       let newPage = parseInt(page) + parseInt(appendPage);
-      dispatch(getCartoons(newPage, 1, Constants.deviceId)).then(
-        ({ payload }) => {
-          if (payload) {
-            if (payload.data) {
-              if (payload.data.length) {
-                payloadItem = payload.data;
-                currentCartoon = payloadItem;
-                setCartoons(payloadItem);
-                AsyncStorage.setItem("@page", page + "");
-              }
+      dispatch(getCartoons(newPage, 1, uniqUserData)).then(({ payload }) => {
+        if (payload) {
+          if (payload.data) {
+            if (payload.data.length) {
+              payloadItem = payload.data;
+              currentCartoon = payloadItem;
+              setCartoons(payloadItem);
+              AsyncStorage.setItem("@page", page + "");
             }
           }
-          let letCartoonItem;
-          if (payloadItem) {
-            letCartoonItem = payloadItem[0];
-          }
-          let _dataObject = (
-            <Card style={{ elevation: 3 }}>
-              <CardItem>
-                <Left>
-                  <MenuIcon navigation={navigation} />
-                  {letCartoonItem &&
-                  letCartoonItem.LogoSrc != null &&
-                  letCartoonItem.LogoSrc.length ? (
-                    <Thumbnail
-                      source={{
-                        uri: imageWebPageUrl + letCartoonItem.LogoSrc
-                      }}
-                      circular
-                    />
-                  ) : null}
-                  {letCartoonItem &&
-                  letCartoonItem.Name != null &&
-                  letCartoonItem.Name.length ? (
-                    <Body>
-                      <Text>{letCartoonItem.Name}</Text>
-                    </Body>
-                  ) : null}
-                </Left>
-              </CardItem>
-              <CardItem cardBody>
-                <TouchableOpacity
-                  style={{
-                    flex: 1,
-                    flexDirection: "row",
-                    flexDirection: "row",
-                    justifyContent: "center",
-                    alignItems: "center"
-                  }}
-                  onPress={() => setModalVisible(true)}
-                >
-                  <Image
-                    style={{ flex: 1, height: height * 0.7 }}
-                    source={
-                      letCartoonItem && {
-                        uri:
-                          imageWebPageUrl +
-                          letCartoonItem?.CartoonImages[0].ImageSrc
-                      }
-                    }
-                    resizeMode="contain"
-                  />
-                </TouchableOpacity>
-              </CardItem>
-            </Card>
-          );
-          page = newPage;
-          AsyncStorage.setItem("@page", page + "");
-          setDeckElement(_dataObject);
-          setLikeButton(true);
         }
-      );
+        let letCartoonItem;
+        if (payloadItem) {
+          letCartoonItem = payloadItem[0];
+        }
+        let _dataObject = (
+          <Card style={{ elevation: 3 }}>
+            <CardItem>
+              <Left>
+                <MenuIcon navigation={navigation} />
+                {letCartoonItem &&
+                letCartoonItem.LogoSrc != null &&
+                letCartoonItem.LogoSrc.length ? (
+                  <Thumbnail
+                    source={{
+                      uri: imageWebPageUrl + letCartoonItem.LogoSrc
+                    }}
+                    circular
+                  />
+                ) : null}
+                {letCartoonItem &&
+                letCartoonItem.Name != null &&
+                letCartoonItem.Name.length ? (
+                  <Body>
+                    <Text>{letCartoonItem.Name}</Text>
+                  </Body>
+                ) : null}
+              </Left>
+            </CardItem>
+            <CardItem cardBody>
+              <TouchableOpacity
+                style={{
+                  flex: 1,
+                  flexDirection: "row",
+                  flexDirection: "row",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+                onPress={() => setModalVisible(true)}
+              >
+                <Image
+                  style={{ flex: 1, height: height * 0.7 }}
+                  source={
+                    letCartoonItem && {
+                      uri:
+                        imageWebPageUrl +
+                        letCartoonItem?.CartoonImages[0].ImageSrc
+                    }
+                  }
+                  resizeMode="contain"
+                />
+              </TouchableOpacity>
+            </CardItem>
+          </Card>
+        );
+        page = newPage;
+        AsyncStorage.setItem("@page", page + "");
+        setDeckElement(_dataObject);
+        setLikeButton(true);
+      });
     }
     setSwiperPage(swiperPage + 1);
   };
 
   const _handlePressLikeCartoon = () => {
     var _data = {
-      Id: cartoons[0].LikeId,
-      CartoonId: cartoons[0].Id,
-      UniqUserKey: Constants.deviceId
+      Id: currentCartoon[0].LikeId,
+      CartoonId: currentCartoon[0].Id,
+      UniqUserKey: uniqUserData
     };
     dispatch(postCartoonLikes(_data)).then(({ payload }) => {
       if (payload) {

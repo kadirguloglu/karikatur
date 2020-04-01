@@ -9,7 +9,6 @@ import {
   GET_MY_CARTOON_LIKES_SUCCESS,
   GET_MY_CARTOON_LIKES_FAIL
 } from "../types/cartoonService";
-import Sentry from "sentry-expo";
 
 const INITIAL_STATE = {
   getMyCartoonLikesLoading: true,
