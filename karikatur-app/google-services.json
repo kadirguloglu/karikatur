@@ -1,0 +1,49 @@
+{
+  "project_info": {
+    "project_number": "919669777685",
+    "firebase_url": "https://karikatur-madeni.firebaseio.com",
+    "project_id": "karikatur-madeni",
+    "storage_bucket": "karikatur-madeni.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919669777685:android:6e66c963b3e3b95f",
+        "android_client_info": {
+          "package_name": "com.antiqmedia.karikaturmadeni"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919669777685-qjm0aohsf7f2m26jmhioe2mv2cjiodp4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.antiqmedia.karikaturmadeni",
+            "certificate_hash": "ea9a5dde86adbc705752ed2a041357afb41e42c9"
+          }
+        },
+        {
+          "client_id": "919669777685-voo97ggsdt3jbbok11u9ioqs55dihi7q.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcCjjV3ZAlqjPChe-Bqe7Diwdoz3y-hMM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919669777685-voo97ggsdt3jbbok11u9ioqs55dihi7q.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-2691089291450682~7929814618"
+    }
+  ],
+  "configuration_version": "1"
+}

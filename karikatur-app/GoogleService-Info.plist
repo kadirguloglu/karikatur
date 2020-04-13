@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>919669777685-0f2pctkdfgd05hqlembg8maetq595ggs.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.919669777685-0f2pctkdfgd05hqlembg8maetq595ggs</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>919669777685-qjm0aohsf7f2m26jmhioe2mv2cjiodp4.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyATnk_Asmtm-7d3cSb925ico3m7ubh6EjE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>919669777685</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.antiqmedia.karikaturmadeni</string>
+	<key>PROJECT_ID</key>
+	<string>karikatur-madeni</string>
+	<key>STORAGE_BUCKET</key>
+	<string>karikatur-madeni.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:919669777685:ios:bed064c79ca44e5bd0f51c</string>
+	<key>DATABASE_URL</key>
+	<string>https://karikatur-madeni.firebaseio.com</string>
+</dict>
+</plist>

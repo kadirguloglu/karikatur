@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   Image,
   Modal,
@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   StyleSheet,
   CameraRoll,
-  AsyncStorage
+  AsyncStorage,
 } from "react-native";
 import {
   Container,
@@ -23,7 +23,7 @@ import {
   Button,
   Spinner,
   Tab,
-  Tabs
+  Tabs,
 } from "native-base";
 import { getStatusBarHeight } from "react-native-status-bar-height";
 import Carousel from "react-native-looped-carousel";
@@ -31,15 +31,21 @@ import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
 import * as FileSystem from "expo-file-system";
 import * as Permissions from "expo-permissions";
 import * as MediaLibrary from "expo-media-library";
+import { RFValue } from "react-native-responsive-fontsize";
+import useStateWithCallback from "use-state-with-callback";
 
-import { getCartoons, postCartoonLikes } from "../src/actions/cartoonService";
+import {
+  getCartoons,
+  postCartoonLikes,
+  getCartoonGallery,
+} from "../src/actions/cartoonService";
 import {
   imageWebPageUrl,
   adMobBannerCode,
   adMobVideoAdsCode,
   adMobAwardAdsCode,
   themeColor,
-  uniqUserData
+  uniqUserData,
 } from "../constants/variables";
 
 const { width, height } = Dimensions.get("window");
@@ -72,32 +78,40 @@ const MenuIcon = React.memo(({ navigation }) => {
 });
 
 let currentCartoon = null;
-let page = 1;
 function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const _deckSwiper = useRef();
+  const [page, setPage] = useStateWithCallback(0, (newPage) => {
+    AsyncStorage.setItem("@page", newPage + "");
+    _handleSwipeCartoonItem(newPage);
+    dispatch(getCartoonGallery(newPage));
+  });
   const [modalVisible, setModalVisible] = useState(false);
   const [swiperPage, setSwiperPage] = useState(1);
   const [deckElement, setDeckElement] = useState(null);
   const [cartoons, setCartoons] = useState(null);
   const [likeButton, setLikeButton] = useState(true);
   const [getPreview, setGetPreview] = useState(true);
+  const [openRightGallery, setOpenRightGallery] = useState(false);
   const [
     spinnerDownloadAdMobRewarded,
-    setSpinnerDownloadAdMobRewarded
+    setSpinnerDownloadAdMobRewarded,
   ] = useState(false);
   const [isWatchingVideo, setIsWatchingVideo] = useState(false);
+  const {
+    getCartoonGalleryLoading,
+    getCartoonGalleryFail,
+    getCartoonGalleryResult,
+  } = useSelector((x) => x.cartoonServiceResponse);
 
   useEffect(() => {
     function initPage() {
-      AsyncStorage.getItem("@page").then(storagePage => {
+      debugger;
+      AsyncStorage.getItem("@page").then((storagePage) => {
         const storePage = storagePage === null ? 1 : parseInt(storagePage);
-        page = storePage;
-        setTimeout(() => {
-          _handleSwipeCartoonItem(0);
-        }, 500);
+        setPage(storePage);
       });
-      AsyncStorage.getItem("@getPreview").then(storageGetPreview => {
+      AsyncStorage.getItem("@getPreview").then((storageGetPreview) => {
         let storeData = storageGetPreview
           ? storageGetPreview === "1"
             ? false
@@ -113,37 +127,44 @@ function HomeScreen({ navigation }) {
         }
       });
 
-      AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
-        setIsWatchingVideo(true);
-      });
-      AdMobRewarded.addEventListener("rewardedVideoDidLoad", () => {
-        setIsWatchingVideo(false);
-      });
-      AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
-        setIsWatchingVideo(false);
-      });
-      AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
-        setSpinnerDownloadAdMobRewarded(false)
-      );
+      if (!__DEV__) {
+        AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
+          setIsWatchingVideo(true);
+        });
+        AdMobRewarded.addEventListener("rewardedVideoDidLoad", () => {
+          setIsWatchingVideo(false);
+        });
+        AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
+          setIsWatchingVideo(false);
+        });
+        AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
+          setSpinnerDownloadAdMobRewarded(false)
+        );
 
-      AdMobRewarded.addEventListener("rewardedVideoDidClose", () =>
-        _handleDownloadCartoon()
-      );
+        AdMobRewarded.addEventListener("rewardedVideoDidClose", () =>
+          _handleDownloadCartoon()
+        );
 
-      AdMobRewarded.addEventListener("rewardedVideoWillLeaveApplication", () =>
-        setIsWatchingVideo(false)
-      );
+        AdMobRewarded.addEventListener(
+          "rewardedVideoWillLeaveApplication",
+          () => setIsWatchingVideo(false)
+        );
+      }
     }
     initPage();
     return () => {
       try {
-        AdMobRewarded.removeAllListeners();
-        AdMobRewarded.removeEventListener("rewardedVideoDidRewardUser");
-        AdMobRewarded.removeEventListener("rewardedVideoDidLoad");
-        AdMobRewarded.removeEventListener("rewardedVideoDidFailToLoad");
-        AdMobRewarded.removeEventListener("rewardedVideoDidOpen");
-        AdMobRewarded.removeEventListener("rewardedVideoDidClose");
-        AdMobRewarded.removeEventListener("rewardedVideoWillLeaveApplication");
+        if (!__DEV__) {
+          AdMobRewarded.removeAllListeners();
+          AdMobRewarded.removeEventListener("rewardedVideoDidRewardUser");
+          AdMobRewarded.removeEventListener("rewardedVideoDidLoad");
+          AdMobRewarded.removeEventListener("rewardedVideoDidFailToLoad");
+          AdMobRewarded.removeEventListener("rewardedVideoDidOpen");
+          AdMobRewarded.removeEventListener("rewardedVideoDidClose");
+          AdMobRewarded.removeEventListener(
+            "rewardedVideoWillLeaveApplication"
+          );
+        }
       } catch (error) {}
     };
   }, []);
@@ -163,7 +184,7 @@ function HomeScreen({ navigation }) {
           .then(({ uri }) => {
             Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
               if (status === "granted") {
-                MediaLibrary.saveToLibraryAsync(uri).then(uriGallery => {
+                MediaLibrary.saveToLibraryAsync(uri).then((uriGallery) => {
                   let alertText = "Karikatür Kaydedildi.";
                   if (isWatchingVideo) {
                     alertText +=
@@ -178,7 +199,7 @@ function HomeScreen({ navigation }) {
               }
             });
           })
-          .catch(error => {
+          .catch((error) => {
             alert(
               "Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz."
             );
@@ -194,7 +215,7 @@ function HomeScreen({ navigation }) {
     }
   };
 
-  const _handleSwipeCartoonItem = appendPage => {
+  const _handleSwipeCartoonItem = () => {
     let data = null;
     if (swiperPage % 6 == 0) {
       data = (
@@ -246,9 +267,7 @@ function HomeScreen({ navigation }) {
       if (cartoons) {
         payloadItem = cartoons;
       }
-
-      let newPage = parseInt(page) + parseInt(appendPage);
-      dispatch(getCartoons(newPage, 1, uniqUserData)).then(({ payload }) => {
+      dispatch(getCartoons(page, 1, uniqUserData)).then(({ payload }) => {
         if (payload) {
           if (payload.data) {
             if (payload.data.length) {
@@ -273,7 +292,7 @@ function HomeScreen({ navigation }) {
                 letCartoonItem.LogoSrc.length ? (
                   <Thumbnail
                     source={{
-                      uri: imageWebPageUrl + letCartoonItem.LogoSrc
+                      uri: imageWebPageUrl + letCartoonItem.LogoSrc,
                     }}
                     circular
                   />
@@ -294,7 +313,7 @@ function HomeScreen({ navigation }) {
                   flexDirection: "row",
                   flexDirection: "row",
                   justifyContent: "center",
-                  alignItems: "center"
+                  alignItems: "center",
                 }}
                 onPress={() => setModalVisible(true)}
               >
@@ -304,7 +323,7 @@ function HomeScreen({ navigation }) {
                     letCartoonItem && {
                       uri:
                         imageWebPageUrl +
-                        letCartoonItem?.CartoonImages[0].ImageSrc
+                        letCartoonItem?.CartoonImages[0].ImageSrc,
                     }
                   }
                   resizeMode="contain"
@@ -313,8 +332,6 @@ function HomeScreen({ navigation }) {
             </CardItem>
           </Card>
         );
-        page = newPage;
-        AsyncStorage.setItem("@page", page + "");
         setDeckElement(_dataObject);
         setLikeButton(true);
       });
@@ -326,7 +343,7 @@ function HomeScreen({ navigation }) {
     var _data = {
       Id: currentCartoon[0].LikeId,
       CartoonId: currentCartoon[0].Id,
-      UniqUserKey: uniqUserData
+      UniqUserKey: uniqUserData,
     };
     dispatch(postCartoonLikes(_data)).then(({ payload }) => {
       if (payload) {
@@ -344,7 +361,7 @@ function HomeScreen({ navigation }) {
     await AdMobRewarded.showAdAsync();
   };
 
-  const _handleChangePreviewTab = page => {
+  const _handleChangePreviewTab = (page) => {
     if (page === 1) {
       setTimeout(() => {
         setGetPreview(false);
@@ -362,7 +379,7 @@ function HomeScreen({ navigation }) {
           <Button rounded light onPress={() => _handlePressLikeCartoon()}>
             <Icon
               style={{
-                color: themeColor
+                color: themeColor,
               }}
               name={cartoons[0]?.IsLiked ? "ios-star" : "ios-star-outline"}
             />
@@ -381,9 +398,32 @@ function HomeScreen({ navigation }) {
             ) : (
               <Icon
                 style={{
-                  color: themeColor
+                  color: themeColor,
                 }}
                 name={"ios-download"}
+              />
+            )}
+          </Button>
+        </View>
+        <View style={style.buttons}>
+          <Button
+            rounded
+            light
+            onPress={() => setOpenRightGallery(!openRightGallery)}
+          >
+            {openRightGallery ? (
+              <Icon
+                style={{
+                  color: themeColor,
+                }}
+                name={"ios-close"}
+              />
+            ) : (
+              <Icon
+                style={{
+                  color: themeColor,
+                }}
+                name={"ios-open"}
               />
             )}
           </Button>
@@ -459,21 +499,56 @@ function HomeScreen({ navigation }) {
           ref={_deckSwiper}
           dataSource={[0]}
           renderEmpty={() => <Spinner />}
-          renderItem={item => {
+          renderItem={(item) => {
             return deckElement;
           }}
-          onSwipeRight={() => _handleSwipeCartoonItem(-1)}
-          onSwipeLeft={() => _handleSwipeCartoonItem(1)}
+          onSwipeRight={() => setPage(page - 1)}
+          onSwipeLeft={() => setPage(page + 1)}
         />
       </View>
-      {cartoons != null && likeButton ? <Buttons></Buttons> : null}
+      {cartoons != null && likeButton ? (
+        <>
+          <Buttons />
+          <View style={style.galleryContainer}>
+            <View style={style.galleryBlock}>
+              {!getCartoonGalleryLoading &&
+              !getCartoonGalleryFail &&
+              getCartoonGalleryResult &&
+              openRightGallery
+                ? getCartoonGalleryResult.map((item, index) => {
+                    return (
+                      <View key={"galleryImage-" + item.Id}>
+                        <TouchableOpacity
+                          onPress={
+                            page == item.PageNumber
+                              ? null
+                              : () => console.log(item.Id)
+                          }
+                        >
+                          <Image
+                            source={{
+                              uri:
+                                imageWebPageUrl +
+                                item.CartoonImages[0].ImageSrc,
+                            }}
+                            style={style.galleryImage}
+                          />
+                        </TouchableOpacity>
+                      </View>
+                    );
+                  })
+                : null}
+            </View>
+          </View>
+        </>
+      ) : null}
       {likeButton ? null : <BottomAds></BottomAds>}
     </Container>
   );
 }
 
 HomeScreen.navigationOptions = {
-  header: null
+  header: null,
 };
 
 export default HomeScreen;
@@ -488,25 +563,25 @@ const style = StyleSheet.create({
     right: 0,
     justifyContent: "space-around",
     padding: 15,
-    alignItems: "center"
+    alignItems: "center",
   },
   buttons: {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    textAlign: "center"
+    textAlign: "center",
   },
   closeIcon: {
     position: "absolute",
     top: 0,
     right: 0,
     padding: 15,
-    zIndex: 2
+    zIndex: 2,
   },
   bannerContainer: {
     height: height * 0.7,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   modalImageContainer: {
     flex: 1,
@@ -514,6 +589,34 @@ const style = StyleSheet.create({
     height: height,
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
-  }
+    alignItems: "center",
+  },
+  galleryImage: {
+    width: RFValue(55),
+    height: RFValue(55),
+    resizeMode: "cover",
+  },
+  galleryContainer: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    height: height,
+  },
+  galleryBlock: {
+    backgroundColor: "white",
+    marginVertical: 4,
+    paddingVertical: 4,
+    paddingLeft: 4,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
 });

@@ -4,6 +4,7 @@ import { Notifications, Linking } from "expo";
 import { useDispatch } from "react-redux";
 import { Spinner, Button } from "native-base";
 import { View, Text, Dimensions, Image, Platform } from "react-native";
+import * as Analytics from "expo-firebase-analytics";
 
 import { postNotificationToken } from "../src/actions/notificationToken";
 import { getProjectDetail } from "../src/actions/settings";
@@ -18,6 +19,11 @@ function Main() {
   const [updateRequired, setUpdateRequired] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
+    async function configurationApp() {
+      if (Platform.OS === "android") {
+        await Analytics.setAnalyticsCollectionEnabled(false);
+      }
+    }
     async function registerForPushNotificationsAsync() {
       try {
         const { status } = await Permissions.askAsync(
@@ -53,6 +59,7 @@ function Main() {
         setUpdateRequired(false);
       }
     }
+    configurationApp();
     registerForPushNotificationsAsync();
     checkVersion();
     return () => {};

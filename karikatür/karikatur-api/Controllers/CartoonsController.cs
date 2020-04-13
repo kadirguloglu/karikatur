@@ -19,6 +19,36 @@ namespace karikatur_api.Controllers
             _context = context;
         }
 
+        [HttpGet("GetCartoonGallery/{page}")]
+        public async Task<ActionResult<IEnumerable<object>>> GetCartoonGallery(int page)
+        {
+            var totalCartoonCount = await _context.Cartoon.CountAsync();
+            var data = new List<object>();
+            for (int i = page - 5; i <= page + 5; i++)
+            {
+                var pageNumber = i;
+                if (pageNumber < 1)
+                {
+                    pageNumber = totalCartoonCount + i;
+                }
+                data.Add(await _context.Cartoon.OrderByDescending(x => x.Rank).Include(x => x.CartoonImages).Include(x => x.Drawers).Include(x => x.CartoonLikes).Skip((pageNumber - 1) * 1).Take(1).ToAsyncEnumerable().Select(x =>
+                {
+                    var likeCount = x.CartoonLikes.Count();
+                    return new
+                    {
+                        x.Id,
+                        x.Drawers.LogoSrc,
+                        x.Drawers.Name,
+                        x.DrawersId,
+                        CartoonImages = x.CartoonImages.Select(y => new { y.ImageSrc, y.Rank }).OrderByDescending(y => y.Rank),
+                        LikeCount = likeCount,
+                        PageNumber = pageNumber
+                    };
+                }).FirstOrDefault());
+            }
+            return data;
+        }
+
         // GET: api/Cartoons
         [HttpGet("{page}/{count}/{uniqUserKey}")]
         public async Task<ActionResult<IEnumerable<object>>> GetCartoon(int page, int count, string uniqUserKey)

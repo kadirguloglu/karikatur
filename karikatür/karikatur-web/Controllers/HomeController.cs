@@ -142,12 +142,13 @@ namespace karikatur_web.Controllers
 
         public IActionResult Gallery()
         {
-            var allFiles = Directory.GetFiles($"{_env.WebRootPath}/Image/", "*.*", SearchOption.AllDirectories).ToList();
-            for (int i = 0; i < allFiles.Count; i++)
+            DirectoryInfo info = new DirectoryInfo($"{_env.WebRootPath}/Image/");
+            var files = info.GetFiles("*",SearchOption.AllDirectories).OrderByDescending(p => p.CreationTime).Select(x=>x.FullName).ToList(); 
+            for (int i = 0; i < files.Count; i++)
             {
-                allFiles[i] = allFiles[i].Replace(_env.WebRootPath, "");
-            }
-            return View(allFiles);
+                files[i] = files[i].Replace(_env.WebRootPath, "");
+            } 
+            return View(files);
         }
 
         [HttpPost]

@@ -4,7 +4,9 @@ import {
   POST_CARTOON_LIKES,
   POST_CARTOON_LIKES_URL,
   GET_MY_CARTOON_LIKES,
-  GET_MY_CARTOON_LIKES_URL
+  GET_MY_CARTOON_LIKES_URL,
+  GET_CARTOON_GALLERY,
+  GET_CARTOON_GALLERY_URL,
 } from "../types/cartoonService";
 
 export function getCartoons(page, count, uniqUserKey) {
@@ -12,9 +14,9 @@ export function getCartoons(page, count, uniqUserKey) {
     type: GET_CARTOONS,
     payload: {
       request: {
-        url: `${GET_CARTOONS_URL}/${page}/${count}/${uniqUserKey}`
-      }
-    }
+        url: `${GET_CARTOONS_URL}/${page}/${count}/${uniqUserKey}`,
+      },
+    },
   };
 }
 
@@ -25,9 +27,9 @@ export function postCartoonLikes(likes) {
       request: {
         url: `${POST_CARTOON_LIKES_URL}`,
         method: "POST",
-        data: likes
-      }
-    }
+        data: likes,
+      },
+    },
   };
 }
 
@@ -36,8 +38,19 @@ export function getMyCartoonLikes(uniqUserKey) {
     type: GET_MY_CARTOON_LIKES,
     payload: {
       request: {
-        url: `${GET_MY_CARTOON_LIKES_URL}/${uniqUserKey}`
-      }
-    }
+        url: `${GET_MY_CARTOON_LIKES_URL}/${uniqUserKey}`,
+      },
+    },
+  };
+}
+
+export function getCartoonGallery(page) {
+  return {
+    type: GET_CARTOON_GALLERY,
+    payload: {
+      request: {
+        url: `${GET_CARTOON_GALLERY_URL}/${page}`,
+      },
+    },
   };
 }
