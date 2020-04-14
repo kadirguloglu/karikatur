@@ -4,14 +4,13 @@ import {
   StatusBar,
   StyleSheet,
   View,
-  AsyncStorage
+  AsyncStorage,
 } from "react-native";
-import { AppLoading } from "expo";
+import { AppLoading, SplashScreen } from "expo";
 import { Asset } from "expo-asset";
 import * as Font from "expo-font";
 import { Ionicons } from "@expo/vector-icons";
 import { NavigationContainer } from "@react-navigation/native";
-import { SplashScreen } from "expo";
 import Constants from "expo-constants";
 import { createStore, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
@@ -26,15 +25,15 @@ import useLinking from "./navigation/useLinking";
 
 const client = axios.create({
   baseURL: "http://karikatur-api.antiquemedia.xyz",
-  responseType: "json"
+  responseType: "json",
 });
 
-client.interceptors.request.use(request => {
+client.interceptors.request.use((request) => {
   //alert("Request : " + JSON.stringify(request));
   return request;
 });
 
-client.interceptors.response.use(response => {
+client.interceptors.response.use((response) => {
   //alert("Response:", JSON.stringify(response));
   return response;
 });
@@ -50,7 +49,9 @@ export default function App(props) {
   const [initialNavigationState, setInitialNavigationState] = useState();
   const [uniqValueLoading, setUniqValueLoading] = useState(true);
   const containerRef = useRef();
-  const { getInitialState } = useLinking(containerRef);
+  if (Platform.OS !== "web") {
+    const { getInitialState } = useLinking(containerRef);
+  }
 
   useEffect(() => {
     async function loadResourcesAndDataAsync() {
@@ -72,7 +73,7 @@ export default function App(props) {
         // Load fonts
         await Font.loadAsync({
           ...Ionicons.font,
-          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
+          "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
@@ -121,8 +122,8 @@ async function loadResourcesAsync() {
       ...Ionicons.font,
       // We include SpaceMono because we use it in HomeScreen.js. Feel free to
       // remove this if you are not using it in your app
-      "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf")
-    })
+      "space-mono": require("./assets/fonts/SpaceMono-Regular.ttf"),
+    }),
   ]);
 }
 
@@ -140,6 +141,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#fff",
-    marginTop: Platform.OS === "ios" ? 0 : -StatusBar.currentHeight
-  }
+    marginTop: Platform.OS === "ios" ? 0 : -StatusBar.currentHeight,
+  },
 });

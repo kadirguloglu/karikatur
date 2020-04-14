@@ -8,6 +8,7 @@ import {
   StyleSheet,
   CameraRoll,
   AsyncStorage,
+  Platform,
 } from "react-native";
 import {
   Container,
@@ -31,7 +32,7 @@ import { AdMobBanner, AdMobRewarded } from "expo-ads-admob";
 import * as FileSystem from "expo-file-system";
 import * as Permissions from "expo-permissions";
 import * as MediaLibrary from "expo-media-library";
-import { RFValue } from "react-native-responsive-fontsize";
+import { RFValue, RFPercentage } from "react-native-responsive-fontsize";
 import useStateWithCallback from "use-state-with-callback";
 
 import {
@@ -81,11 +82,12 @@ let currentCartoon = null;
 function HomeScreen({ navigation }) {
   const dispatch = useDispatch();
   const _deckSwiper = useRef();
-  const [page, setPage] = useStateWithCallback(0, (newPage) => {
+  const [page, setPage] = useStateWithCallback(-2, (newPage) => {
     AsyncStorage.setItem("@page", newPage + "");
-    _handleSwipeCartoonItem(newPage);
-    dispatch(getCartoonGallery(newPage));
   });
+  const [activeDeckElementIsAdward, setActiveDeckElementIsAdward] = useState(
+    false
+  );
   const [modalVisible, setModalVisible] = useState(false);
   const [swiperPage, setSwiperPage] = useState(1);
   const [deckElement, setDeckElement] = useState(null);
@@ -105,18 +107,18 @@ function HomeScreen({ navigation }) {
   } = useSelector((x) => x.cartoonServiceResponse);
 
   useEffect(() => {
-    function initPage() {
-      debugger;
-      AsyncStorage.getItem("@page").then((storagePage) => {
-        const storePage = storagePage === null ? 1 : parseInt(storagePage);
-        setPage(storePage);
-      });
+    async function initPage() {
+      let storagePage = await AsyncStorage.getItem("@page");
+      storagePage = storagePage === null ? 1 : parseInt(storagePage);
+      setPage(storagePage);
+      _handleSwipeCartoonItem(storagePage);
       AsyncStorage.getItem("@getPreview").then((storageGetPreview) => {
         let storeData = storageGetPreview
           ? storageGetPreview === "1"
             ? false
             : true
           : true;
+
         setGetPreview(storeData);
 
         if (storeData) {
@@ -127,7 +129,7 @@ function HomeScreen({ navigation }) {
         }
       });
 
-      if (!__DEV__) {
+      if (!__DEV__ && typeof AdMobRewarded.addEventListener === "function") {
         AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
           setIsWatchingVideo(true);
         });
@@ -215,9 +217,10 @@ function HomeScreen({ navigation }) {
     }
   };
 
-  const _handleSwipeCartoonItem = () => {
+  const _handleSwipeCartoonItem = (pageNumber) => {
     let data = null;
-    if (swiperPage % 6 == 0) {
+    if (swiperPage % 6 == 0 && Platform.OS !== "web") {
+      setActiveDeckElementIsAdward(true);
       data = (
         <Card style={{ elevation: 3 }}>
           <CardItem>
@@ -243,6 +246,7 @@ function HomeScreen({ navigation }) {
       setDeckElement(data);
       setLikeButton(false);
     } else {
+      setActiveDeckElementIsAdward(false);
       setDeckElement(
         <Card style={{ elevation: 3 }}>
           <CardItem>
@@ -267,14 +271,14 @@ function HomeScreen({ navigation }) {
       if (cartoons) {
         payloadItem = cartoons;
       }
-      dispatch(getCartoons(page, 1, uniqUserData)).then(({ payload }) => {
+      dispatch(getCartoons(pageNumber, 1, uniqUserData)).then(({ payload }) => {
         if (payload) {
           if (payload.data) {
             if (payload.data.length) {
               payloadItem = payload.data;
               currentCartoon = payloadItem;
+              dispatch(getCartoonGallery(pageNumber));
               setCartoons(payloadItem);
-              AsyncStorage.setItem("@page", page + "");
             }
           }
         }
@@ -308,13 +312,7 @@ function HomeScreen({ navigation }) {
             </CardItem>
             <CardItem cardBody>
               <TouchableOpacity
-                style={{
-                  flex: 1,
-                  flexDirection: "row",
-                  flexDirection: "row",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                style={style.imageOpenModalTouchable}
                 onPress={() => setModalVisible(true)}
               >
                 <Image
@@ -356,17 +354,10 @@ function HomeScreen({ navigation }) {
 
   const _handlePressSaveCartoon = async () => {
     setSpinnerDownloadAdMobRewarded(true);
-    AdMobRewarded.setAdUnitID(adMobAwardAdsCode);
-    await AdMobRewarded.requestAdAsync();
-    await AdMobRewarded.showAdAsync();
-  };
-
-  const _handleChangePreviewTab = (page) => {
-    if (page === 1) {
-      setTimeout(() => {
-        setGetPreview(false);
-        AsyncStorage.setItem("@getPreview", "1");
-      }, 5000);
+    if (Platform.OS !== "web") {
+      AdMobRewarded.setAdUnitID(adMobAwardAdsCode);
+      await AdMobRewarded.requestAdAsync();
+      await AdMobRewarded.showAdAsync();
     }
   };
 
@@ -385,26 +376,28 @@ function HomeScreen({ navigation }) {
             />
           </Button>
         </View>
-        <View style={style.buttons}>
-          <Button
-            rounded
-            light
-            onPress={() =>
-              spinnerDownloadAdMobRewarded ? null : _handlePressSaveCartoon()
-            }
-          >
-            {spinnerDownloadAdMobRewarded ? (
-              <Spinner color={themeColor} style={{ color: themeColor }} />
-            ) : (
-              <Icon
-                style={{
-                  color: themeColor,
-                }}
-                name={"ios-download"}
-              />
-            )}
-          </Button>
-        </View>
+        {Platform.OS !== "web" ? (
+          <View style={style.buttons}>
+            <Button
+              rounded
+              light
+              onPress={() =>
+                spinnerDownloadAdMobRewarded ? null : _handlePressSaveCartoon()
+              }
+            >
+              {spinnerDownloadAdMobRewarded ? (
+                <Spinner color={themeColor} style={{ color: themeColor }} />
+              ) : (
+                <Icon
+                  style={{
+                    color: themeColor,
+                  }}
+                  name={"ios-download"}
+                />
+              )}
+            </Button>
+          </View>
+        ) : null}
         <View style={style.buttons}>
           <Button
             rounded
@@ -434,10 +427,7 @@ function HomeScreen({ navigation }) {
 
   if (getPreview) {
     return (
-      <Tabs
-        renderTabBar={() => <View />}
-        onChangeTab={({ i }) => _handleChangePreviewTab(i)}
-      >
+      <Tabs renderTabBar={() => <View />}>
         <Tab heading={<View />}>
           <Image
             style={{ width: width, height: height }}
@@ -502,8 +492,24 @@ function HomeScreen({ navigation }) {
           renderItem={(item) => {
             return deckElement;
           }}
-          onSwipeRight={() => setPage(page - 1)}
-          onSwipeLeft={() => setPage(page + 1)}
+          onSwipeRight={() => {
+            if (activeDeckElementIsAdward) {
+              _handleSwipeCartoonItem(page);
+              setPage(page);
+            } else {
+              _handleSwipeCartoonItem(page - 1);
+              setPage(page - 1);
+            }
+          }}
+          onSwipeLeft={() => {
+            if (activeDeckElementIsAdward) {
+              _handleSwipeCartoonItem(page);
+              setPage(page);
+            } else {
+              _handleSwipeCartoonItem(page + 1);
+              setPage(page + 1);
+            }
+          }}
         />
       </View>
       {cartoons != null && likeButton ? (
@@ -514,6 +520,7 @@ function HomeScreen({ navigation }) {
               {!getCartoonGalleryLoading &&
               !getCartoonGalleryFail &&
               getCartoonGalleryResult &&
+              getCartoonGalleryResult.length &&
               openRightGallery
                 ? getCartoonGalleryResult.map((item, index) => {
                     return (
@@ -522,7 +529,10 @@ function HomeScreen({ navigation }) {
                           onPress={
                             page == item.PageNumber
                               ? null
-                              : () => console.log(item.Id)
+                              : () => {
+                                  _handleSwipeCartoonItem(item.PageNumber);
+                                  setPage(item.PageNumber);
+                                }
                           }
                         >
                           <Image
@@ -592,9 +602,9 @@ const style = StyleSheet.create({
     alignItems: "center",
   },
   galleryImage: {
-    width: RFValue(55),
-    height: RFValue(55),
-    resizeMode: "cover",
+    width: Platform.OS === "web" ? RFPercentage(5) : RFValue(80),
+    height: Platform.OS === "web" ? RFPercentage(5) : RFValue(80),
+    resizeMode: "contain",
   },
   galleryContainer: {
     position: "absolute",
@@ -618,5 +628,12 @@ const style = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
+  },
+  imageOpenModalTouchable: {
+    flex: 1,
+    flexDirection: "row",
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

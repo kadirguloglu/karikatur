@@ -19,10 +19,8 @@ function Main() {
   const [updateRequired, setUpdateRequired] = useState(true);
   const dispatch = useDispatch();
   useEffect(() => {
-    async function configurationApp() {
-      if (Platform.OS === "android") {
-        await Analytics.setAnalyticsCollectionEnabled(false);
-      }
+    async function configurationAppWithWeb() {
+      await Analytics.setAnalyticsCollectionEnabled(false);
     }
     async function registerForPushNotificationsAsync() {
       try {
@@ -40,7 +38,11 @@ function Main() {
     async function checkVersion() {
       try {
         dispatch(getProjectDetail()).then(({ payload }) => {
-          if (payload.data.VersionNumber !== ProjectVersion) {
+          if (
+            payload &&
+            payload.data &&
+            payload.data.VersionNumber !== ProjectVersion
+          ) {
             if (payload.data.UpdateRequired) {
               /// uygulamayı güncelle
               setGetVersionLoading(false);
@@ -59,7 +61,9 @@ function Main() {
         setUpdateRequired(false);
       }
     }
-    configurationApp();
+    if (Platform.OS === "web") {
+      configurationAppWithWeb();
+    }
     registerForPushNotificationsAsync();
     checkVersion();
     return () => {};
@@ -84,7 +88,7 @@ function Main() {
           flexDirection: "row",
           justifyContent: "center",
           alignItems: "center",
-          flex: 1
+          flex: 1,
         }}
       >
         <Spinner />
@@ -99,7 +103,7 @@ function Main() {
           justifyContent: "center",
           alignItems: "center",
           flex: 1,
-          margin: 10
+          margin: 10,
         }}
       >
         <Image
@@ -107,7 +111,7 @@ function Main() {
           style={{
             width: width * 0.2,
             height: height * 0.2,
-            resizeMode: "cover"
+            resizeMode: "cover",
           }}
         />
         <Text style={{ textAlign: "center", marginTop: 10, marginBottom: 10 }}>

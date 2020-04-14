@@ -4,7 +4,7 @@
     "slug": "karikatur-app",
     "privacy": "public",
     "platforms": ["ios", "android", "web"],
-    "version": "7.4.1",
+    "version": "7.4.6",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
@@ -24,10 +24,11 @@
     },
     "android": {
       "package": "com.antiqmedia.karikaturmadeni",
-      "versionCode": 18,
+      "versionCode": 20,
       "icon": "./assets/images/icon.png",
       "googleServicesFile": "./google-services.json"
     },
+    "description": "",
     "web": {
       "config": {
         "firebase": {
@@ -37,10 +38,10 @@
           "projectId": "karikatur-madeni",
           "storageBucket": "karikatur-madeni.appspot.com",
           "messagingSenderId": "919669777685",
-          "appId": "1:919669777685:web:51cbabbf08c5f775d0f51c"
+          "appId": "1:919669777685:web:51cbabbf08c5f775d0f51c",
+          "measurementId": "G-5832NKW6G2"
         }
       }
-    },
-    "description": ""
+    }
   }
 }

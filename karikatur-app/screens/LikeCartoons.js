@@ -11,7 +11,7 @@ import {
   View,
   Spinner,
   Right,
-  Button
+  Button,
 } from "native-base";
 import { Image, Dimensions, StyleSheet } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,12 +24,12 @@ import {
   adMobVideoAdsCode,
   adMobAwardAdsCode,
   themeColor,
-  uniqUserData
+  uniqUserData,
 } from "../constants/variables";
 
 import {
   getMyCartoonLikes,
-  postCartoonLikes
+  postCartoonLikes,
 } from "../src/actions/cartoonService";
 
 function LikeCartoons({ navigation }) {
@@ -38,14 +38,14 @@ function LikeCartoons({ navigation }) {
   const [isWatchingVideo, setIsWatchingVideo] = useState(false);
   const [
     spinnerDownloadAdMobRewarded,
-    setSpinnerDownloadAdMobRewarded
+    setSpinnerDownloadAdMobRewarded,
   ] = useState(false);
 
   const {
     getMyCartoonLikesLoading,
     getMyCartoonLikesFail,
-    getMyCartoonLikesResult
-  } = useSelector(x => x.cartoonServiceResponse);
+    getMyCartoonLikesResult,
+  } = useSelector((x) => x.cartoonServiceResponse);
 
   useEffect(() => {
     dispatch(getMyCartoonLikes(uniqUserData));
@@ -53,26 +53,28 @@ function LikeCartoons({ navigation }) {
   }, []);
 
   useEffect(() => {
-    AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
-      setIsWatchingVideo(true);
-    });
-    AdMobRewarded.addEventListener("rewardedVideoDidLoad", () => {
-      setIsWatchingVideo(false);
-    });
-    AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
-      setIsWatchingVideo(false);
-    });
-    AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
-      setSpinnerDownloadAdMobRewarded(false)
-    );
+    if (typeof AdMobRewarded.addEventListener === "function") {
+      AdMobRewarded.addEventListener("rewardedVideoDidRewardUser", () => {
+        setIsWatchingVideo(true);
+      });
+      AdMobRewarded.addEventListener("rewardedVideoDidLoad", () => {
+        setIsWatchingVideo(false);
+      });
+      AdMobRewarded.addEventListener("rewardedVideoDidFailToLoad", () => {
+        setIsWatchingVideo(false);
+      });
+      AdMobRewarded.addEventListener("rewardedVideoDidOpen", () =>
+        setSpinnerDownloadAdMobRewarded(false)
+      );
 
-    AdMobRewarded.addEventListener("rewardedVideoDidClose", () =>
-      _handleDownloadCartoon()
-    );
+      AdMobRewarded.addEventListener("rewardedVideoDidClose", () =>
+        _handleDownloadCartoon()
+      );
 
-    AdMobRewarded.addEventListener("rewardedVideoWillLeaveApplication", () =>
-      setIsWatchingVideo(false)
-    );
+      AdMobRewarded.addEventListener("rewardedVideoWillLeaveApplication", () =>
+        setIsWatchingVideo(false)
+      );
+    }
     return () => {
       try {
         AdMobRewarded.removeAllListeners();
@@ -86,7 +88,7 @@ function LikeCartoons({ navigation }) {
     };
   }, []);
 
-  const _handlePressSaveCartoon = async cartoon => {
+  const _handlePressSaveCartoon = async (cartoon) => {
     setSelectedCartoon(cartoon);
     setIsWatchingVideo(false);
     setSpinnerDownloadAdMobRewarded(true);
@@ -110,7 +112,7 @@ function LikeCartoons({ navigation }) {
           .then(({ uri }) => {
             Permissions.askAsync(Permissions.CAMERA_ROLL).then(({ status }) => {
               if (status === "granted") {
-                MediaLibrary.saveToLibraryAsync(uri).then(uriGallery => {
+                MediaLibrary.saveToLibraryAsync(uri).then((uriGallery) => {
                   let alertText = "Karikatür Kaydedildi.";
                   if (isWatchingVideo) {
                     alertText +=
@@ -125,7 +127,7 @@ function LikeCartoons({ navigation }) {
               }
             });
           })
-          .catch(error => {
+          .catch((error) => {
             alert(
               "Karikatür kaydedilemedi. İnternet bağlantınızı kontrol ediniz."
             );
@@ -178,7 +180,7 @@ function LikeCartoons({ navigation }) {
                 <Image
                   style={styles.image}
                   source={{
-                    uri: imageWebPageUrl + item.CartoonImages[0].ImageSrc
+                    uri: imageWebPageUrl + item.CartoonImages[0].ImageSrc,
                   }}
                   resizeMode="contain"
                 />
@@ -191,7 +193,7 @@ function LikeCartoons({ navigation }) {
                         postCartoonLikes({
                           Id: item.LikeId,
                           CartoonId: item.Id,
-                          UniqUserKey: uniqUserData
+                          UniqUserKey: uniqUserData,
                         })
                       ).then(() => {
                         dispatch(getMyCartoonLikes(uniqUserData));
@@ -234,19 +236,19 @@ const styles = StyleSheet.create({
   centerPage: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   cartoonContainer: {
     borderWidth: 1,
     borderColor: "#DCDCDC",
     padding: 2,
-    justifyContent: "flex-end"
+    justifyContent: "flex-end",
   },
   image: { flex: 1, height: 150 },
   buttons: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   button: {
     backgroundColor: themeColor,
@@ -256,7 +258,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     margin: 2,
     width: 35,
-    height: 35
+    height: 35,
   },
   icon: {
     fontSize: 20,
@@ -264,6 +266,6 @@ const styles = StyleSheet.create({
     height: 20,
     textAlign: "center",
     alignItems: "center",
-    alignSelf: "center"
-  }
+    alignSelf: "center",
+  },
 });
